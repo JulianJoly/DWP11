@@ -1,0 +1,64 @@
+/*
+Theme Name:   Motaphoto
+Theme URI:    https://www.motaphoto.com
+Description:  Thème personnalisé pour Nathalie Mota
+Author:       Julian Joly
+Author URI:   
+Template:     
+Version:      1.0.0
+License:      GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Tags:         motaphoto
+Text Domain:  motaphoto
+*/
+
+@mixin flex() {
+    display: flex;
+    align-items: center;
+}
+
+@mixin nav() {
+    text-transform: uppercase;
+    list-style: none;
+}
+
+* {
+    font-family: sans-serif;
+    :link {
+        text-decoration: none;
+    }
+}
+
+.header {
+    height: 80px;
+    justify-content: space-between;
+    @include flex();
+    &__logo {
+        margin-left: 5%;
+    }
+    &__nav {
+        margin-right: 5%;
+        @include flex();
+        &--menu {
+            @include nav();
+        }
+    }
+}
+
+body {
+    max-width: 1440px;
+    margin: auto;
+}
+
+.footer {
+    height: 40px;
+    border-top: 1px solid black;
+    &__nav {
+        justify-content: center;
+        @include flex();
+        @include nav();
+        &--link {
+            margin: 0 2.5%;
+        }
+    }
+}
