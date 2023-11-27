@@ -4,12 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Motaphoto</title>
-<!--         <link rel="stylesheet" href="wp-content/themes/motaphoto/style.css">
-        <script defer src="wp-content/themes/motaphoto/assets/js/nav-menu.js"></script> -->
+        <link rel="stylesheet" href="<?php echo get_theme_file_uri() . '/style.css' ?>">
+        <script defer src="<?php echo get_theme_file_uri() . '/assets/js/nav-menu.js' ?>"></script>
     </head>
     <body>
         <header class="header">
-            <img src="wp-content/themes/motaphoto/assets/img/logo.png" alt="Logo du site" class="header__logo">
+            <img src="<?php echo get_theme_file_uri() . '/assets/img/logo.png' ?>" alt="Logo du site" class="header__logo">
             <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" class="header__nav">
                 <?php
                     wp_nav_menu([
@@ -20,7 +20,7 @@
                     ]);
                 ?>
                 <button type="button" aria-expanded="false" aria-controls="primary-menu" class="header__nav--button">
-                    <?php esc_html_e( 'Menu', 'text-domain' ); ?>
+                    <img src="<?php echo get_theme_file_uri() . '/assets/img/nav-menu-open.png' ?>" alt="Ouvrir le menu de navigation" class="header__nav--buttonImg">
                 </button>
             </nav>
         </header>

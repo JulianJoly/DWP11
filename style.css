@@ -12,11 +12,9 @@ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 Tags:         motaphoto
 Text Domain:  motaphoto
 */
-* {
-  font-family: sans-serif;
-}
-* :link {
+a {
   text-decoration: none;
+  color: black;
 }
 
 .header {
@@ -36,6 +34,13 @@ Text Domain:  motaphoto
 .header__nav--menu {
   text-transform: uppercase;
   list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.header__nav--button {
+  border: none;
+  background-color: transparent;
 }
 
 body {
@@ -53,7 +58,52 @@ body {
   align-items: center;
   text-transform: uppercase;
   list-style: none;
+  padding: 0;
 }
 .footer__nav--link {
   margin: 0 2.5%;
+}
+
+@media screen and (min-width: 801px) {
+  .header__nav--button {
+    display: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  .header {
+    height: 72px;
+    padding: 0 5%;
+  }
+  .header__nav.toggled ul {
+    position: absolute;
+    height: calc(100vh - 72px);
+    width: 100vw;
+    background-color: #E00000;
+    margin: 72px 0 0 0;
+    left: 0;
+    top: 0;
+    font-size: 44px;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+  .header__nav.toggled ul a {
+    color: white;
+  }
+  .header__nav--menu {
+    display: none;
+  }
+  .header__logo {
+    width: 42%;
+  }
+  .footer, .footer__nav {
+    height: 208px;
+  }
+  .footer__nav {
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0;
+  }
 }/*# sourceMappingURL=style.css.map */
