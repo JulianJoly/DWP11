@@ -10,6 +10,7 @@ add_action( 'after_setup_theme', 'register_my_menu' );
 function theme_enqueue_scripts() {
     wp_enqueue_style( 'motaphoto-style', get_stylesheet_uri() );
     wp_enqueue_script( 'nav-menu', get_theme_file_uri() . '/assets/js/nav-menu.js', array(), '1.0.0', array( 'strategy' => 'defer', ), true );
+    wp_enqueue_script( 'contact-form', get_theme_file_uri() . '/assets/js/contact-form.js', array(), '1.0.0', array( 'strategy' => 'defer', ), true );
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
 
@@ -25,5 +26,3 @@ function add_contact_button( $items, $args ) {
     $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a class="contact--button">Contact</a></li>';
     return $items;
 }
-
-?>
