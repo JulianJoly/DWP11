@@ -2,20 +2,20 @@
 
 /* @type {HTMLElement} */
 const contactPopup = document.querySelector('.contact')
-console.log(contactPopup);
+/* console.log(contactPopup); */
 
 /* @type {HTMLElement} */
 const contactButton = document.querySelector('.contact--button')
-console.log(contactButton);
+/* console.log(contactButton); */
 
 /* @type {HTMLElement} */
 const contactBackground = document.querySelector('.contact--background')
-console.log(contactBackground);
+/* console.log(contactBackground); */
 
 if ( contactPopup && contactButton && contactBackground) {
     /* @type {HTMLElement} */
     const currentURL = window.location.href
-    console.log(currentURL);
+    /* console.log(currentURL); */
 
     /* @param {HTMLElement} element */
     const toggle = ( element ) => element.classList.toggle( 'toggled' );

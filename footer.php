@@ -5,7 +5,7 @@
                 <li class="footer__nav--link">Tous Droits Réservés</li>
             </ul>
             <?php include 'templates_part/contact.php'; ?>
-            <script defer src="<?php echo get_theme_file_uri() . '/assets/js/contact-form.js' ?>"></script>
+            <?php wp_footer(); ?>
         </footer>
     </body>
 </html>
