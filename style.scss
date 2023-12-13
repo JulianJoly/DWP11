@@ -21,12 +21,14 @@ Text Domain:  motaphoto
     src: url( '/motaphoto/wp-content/themes/motaphoto/assets/fonts/poppins/Poppins-Regular.ttf' );
 }
 
-$red:#E00000;
+$rouge:#E00000;
+$grisMedium:#D8D8D8;
 $headerHeightMobile: 72px;
 
-@mixin flex() {
+@mixin flex( $align, $justify ) {
     display: flex;
-    align-items: center;
+    align-items: $align;
+    justify-content: $justify;
 }
 
 @mixin caps() {
@@ -38,9 +40,20 @@ $headerHeightMobile: 72px;
     position: absolute;
     background-color: $color;
     height: $height;
-    width: 100vw;
+    width: 100%;
     left: 0;
     top: 0;
+}
+
+@mixin button() {
+    height: 50px;
+    border: 0;
+    font-size: 12px;
+    background-color: $grisMedium;
+    &:hover {
+        background-color: darken( $grisMedium, 5% );
+        cursor: pointer;
+    }
 }
 
 @mixin toggle( $opacity ) {
@@ -68,19 +81,34 @@ $headerHeightMobile: 72px;
     }
 }
 
+.body {
+    max-width: 1440px;
+    margin: auto;
+    font-family: 'space-mono';
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    h2 {
+        font-size: 66px;
+        font-weight: 400;
+        font-style: italic;
+    }
+    p {
+        font-size: 14px;
+    }
+}
+
 .header {
     height: 80px;
-    justify-content: space-between;
-    @include flex();
-    &__logo {
-        margin-left: 5%;
-    }
+    box-shadow: 0 30px 30px -30px #E5E5E5;
+    @include flex( center, space-between );
     &__nav {
-        margin-right: 5%;
-        @include flex();
+        margin-right: 7vw;
+        @include flex( center, null );
         &--menu {
             @include caps();
-            @include flex();
+            @include flex( center, null );
             gap: 50px;
             
         }
@@ -89,18 +117,87 @@ $headerHeightMobile: 72px;
             background-color: transparent;
         }
     }
-}
-
-body {
-    max-width: 1440px;
-    margin: auto;
-    font-family: 'space-mono';
-    a {
-        text-decoration: none;
-        color: black;
+    &__logo {
+        margin-left: 7vw;
     }
-    h1, h2 {
-        font-style: italic;
+}
+    
+.main {
+    padding: 40px 0;
+
+    .photo {
+        &__container, &--img {
+            display: inline-block;
+        }
+        &__container {
+            border-bottom: 1px solid black;
+            padding: 20px 0;
+            &--text, &--title {
+                @include caps();
+            }
+            &--title {
+                width: 75%;
+                line-height: 100%;
+                margin: 0;
+            }
+        }
+        &--img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            margin-bottom: -6px;
+        }
+    }
+    
+    .interested {
+        border-bottom: 1px solid black;
+        width: 100%;
+        height: 118px;
+        gap: 2%;
+        @include flex( center, null );
+        &__container, &__nav {
+            width: 49%;
+        }
+        &__container {
+            padding: 34px 0;
+            display: inline-block;
+            &--text {
+                width: fit-content;
+                font-family: 'poppins';
+            }
+            &--button {
+                width: 15vw;
+                min-width: 50px;
+                max-width: 250px;
+                @include button();
+            }
+        }
+        &__nav {
+            direction: rtl;
+            padding-top: 8px;
+            &--arrows, &--thumbnails {
+                width: 170px;
+            }
+            &--arrows {
+                height: 35px;
+                margin: 0;
+                font-size: 22px;
+                a {
+                    width: 75px;
+                    display: inline-block;
+                    margin-left: 10px;
+                    text-align: center;
+                }
+            }
+            &--thumbnails {
+                height: 75px;
+                img {
+                    margin-left: 10px;
+                    width: 75px;
+                    height: 75px;
+                }
+            }
+        }
     }
 }
 
@@ -117,13 +214,14 @@ body {
     background-size: contain;
     font-size: 12px;
     font-weight: 500;
+    padding: 150px 0 25px 0;
     margin: 80px calc( ( 100vw - 600px ) / 2 ) 0;
     top: 0;
     @include caps();
     @include toggle( 1 );
     &--background {
         @include toggle( 0.5 );
-        @include background( 100vh, black );
+        @include background( 100%, black );
     }
     &--button {
         &:hover {
@@ -166,18 +264,13 @@ body {
         }
         /* error message under the form */
         .wpcf7-response-output, .wpcf7-not-valid-tip {
-            color: $red;
+            color: $rouge;
         }
         /* submit button of the form */
         .wpcf7-submit {
-            height: 50px;
             width: 100%;
-            border: 0;
-            font-size: 12px;
             border-radius: 0;
-            &:hover {
-                cursor: pointer;
-            }
+            @include button();
         }
     }
     /* error message above the form */
@@ -190,9 +283,9 @@ body {
     height: 40px;
     border-top: 1px solid black;
     &__nav {
-        justify-content: center;
+        margin: 8px 0;
         padding: 0;
-        @include flex();
+        @include flex( center, center );
         @include caps();
         &--link {
             margin: 0 2.5%;
@@ -204,10 +297,23 @@ body {
     .contact {
         margin: 80px 420px;
     }
+
+    .header {
+        &__nav {
+            margin-right: 140px;
+        }
+        &__logo {
+            margin-left: 140px;
+        }
+    }
+
+    .main {
+        margin: 0 150px;
+    }
 }
 
 /* desktop version */
-@media screen and ( min-width: 858px ) {
+@media screen and ( min-width: 900px ) {
     .header {
         &__nav {
             &--button {
@@ -215,33 +321,59 @@ body {
             }
         }
     }
-    
-    body {
-        h2 {
-            font-size: 66px;
-        }
-    }
 
-    .contact {
-        padding: 150px 0 25px 0;
+    .main {
+        margin: 0 7vw;
+
+        .photo {
+            gap: 2%;
+            flex-direction: row-reverse;
+            @include flex( end, null );
+        }
+        
+        .paysage {
+            .photo {
+                &__container {
+                    width: 34%;
+                }
+            }
+            picture {
+                width: 64%;
+            }
+        }
+        
+        .portrait {
+            .photo {
+                &__container {
+                    width: 49%;
+                }
+            }
+            picture {
+                width: 49%;
+            }
+        }
+
+        .interested {
+            &__container {
+                @include flex( center, space-between );
+            }
+        }
     }
 }
 
 /* mobile version */
-@media screen and ( max-width: 857px ) {
+@media screen and ( max-width: 899px ) {
     .header {
         height: $headerHeightMobile;
-        padding: 0 5%;
         &__nav {
             &--menu {
                 font-size: 44px;
                 flex-direction: column;
-                justify-content: center;
                 margin: $headerHeightMobile 0 0 0;
                 padding: 0 0 $headerHeightMobile 0;
                 gap: 5%;
-                @include flex();
-                @include background( calc( 100vh - $headerHeightMobile ), $red );
+                @include flex( center, center );
+                @include background( calc( 100vh - $headerHeightMobile ), $rouge );
                 @include toggle( 1 );
                 a {
                     color: white;
@@ -249,13 +381,41 @@ body {
             }
         }
         &__logo {
-            width: 42%;
+            width: 60%;
+            max-width: fit-content;
+            object-fit: contain;
         }
     }
+
+    .main {
+        padding: 10px 0;
     
-    body {
-        h2 {
-            font-size: 46px;
+        .photo {
+            &__container, &--img {
+                width: 80vw;
+                padding: 20px 10vw;
+            }
+            &__container {
+                &--title {
+                    font-size: 46px;
+                    letter-spacing: 5px;
+                }
+            }
+        }
+
+        .interested {
+            width: 80vw;
+            padding: 10px 10vw;
+            &__container {
+                width: 100%;
+                &--button {
+                    width: 100%;
+                    max-width: none;
+                }
+            }
+            &__nav {
+                display: none;
+            }
         }
     }
 

@@ -1,3 +1,4 @@
+        </main>
         <footer class="footer">
             <ul class="footer__nav">
                 <li class="footer__nav--link"><a href="./mentions-legales">Mentions Légales</a></li>

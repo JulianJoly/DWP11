@@ -6,7 +6,7 @@
         <title>Motaphoto</title>
         <?php wp_head(); ?>
     </head>
-    <body>
+    <body class="body">
         <header class="header">
             <img src="<?php echo get_theme_file_uri() . '/assets/img/logo.png' ?>" alt="Logo du site" class="header__logo">
             <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" class="header__nav">
@@ -23,3 +23,4 @@
                 </button>
             </nav>
         </header>
+        <main class="main">
