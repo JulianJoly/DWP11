@@ -7,7 +7,7 @@
         <?php wp_head(); ?>
     </head>
     <body class="body">
-        <header class="header">
+        <header class="header width100">
             <img src="<?php echo get_theme_file_uri() . '/assets/img/logo.png' ?>" alt="Logo du site" class="header__logo">
             <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" class="header__nav">
                 <?php
@@ -15,7 +15,7 @@
                         'theme_location' => 'main-menu',
                         'container'      => false,
                         'menu_id'        => 'primary-menu',
-                        'menu_class'     => 'header__nav--menu'
+                        'menu_class'     => 'header__nav--menu caps'
                     ]);
                 ?>
                 <button type="button" aria-expanded="false" aria-controls="primary-menu" class="header__nav--button">

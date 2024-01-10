@@ -19,21 +19,17 @@ document.addEventListener( 'DOMContentLoaded', function() {
     .then( function( data ) {
         /* @type {URL} */
         const currentURL = window.location.href
-        console.log(currentURL);
 
         /* @type {HTMLElement} */
-        const customPostContainer = document.querySelector( '.single' );
+        const customPostContainer = document.querySelector( '.photo' );
 
         if ( customPostContainer ) {
             /* @type {HTMLElement} */
-            const infoContainer = document.querySelector( '.single__info' );
+            const moreContainer = document.querySelector( '.more__container' );
 
             data.posts.forEach( function( post ) {
                 if ( currentURL.includes( post.post_name ) ) {
                     console.log(post);
-                    /* infoContainer.insertAdjacentHTML( 'beforeend', '<h2 class="single__info--title">' + post.post_title + '</h2>' ); */
-                    /* infoContainer.insertAdjacentHTML( 'beforeend', '<p class="single__info--text">' + post.thumbnail + '</p>' ); */
-                    /* customPostContainer.insertAdjacentHTML( 'beforeend', '<img class="single--img" alt="" src="' + post.hero_image + '">' ); */
                 }
             });
         }

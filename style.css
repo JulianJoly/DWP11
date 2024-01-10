@@ -36,14 +36,36 @@ Text Domain:  motaphoto
 .body a {
   text-decoration: none;
   color: black;
+  font-weight: 400;
 }
 .body h2 {
   font-size: 66px;
   font-weight: 400;
   font-style: italic;
 }
+.body h3 {
+  font-size: 18px;
+  font-weight: 400;
+}
 .body p {
   font-size: 14px;
+  font-weight: 300;
+}
+.body .width100 {
+  width: 100%;
+}
+.body .height100 {
+  height: 100%;
+}
+.body .noMargin {
+  margin: 0;
+}
+.body .noPadding {
+  padding: 0;
+}
+.body .caps {
+  text-transform: uppercase;
+  list-style: none;
 }
 
 .header {
@@ -59,8 +81,6 @@ Text Domain:  motaphoto
   align-items: center;
 }
 .header__nav--menu {
-  text-transform: uppercase;
-  list-style: none;
   display: flex;
   align-items: center;
   gap: 50px;
@@ -72,36 +92,83 @@ Text Domain:  motaphoto
 .header__logo {
   margin-left: 7vw;
 }
+.header.fixed {
+  position: fixed;
+  top: 0;
+  background-color: white;
+}
 
 .main {
   padding: 40px 0;
 }
-.main .photo__container, .main .photo--img {
+.main .home--header {
+  width: 100vw;
+  height: auto;
+  margin: -40px -7vw;
+}
+.main .photoBlock {
+  margin: 40px 0;
+}
+.main .photoBlock .photo {
+  width: 49%;
+  height: 495px;
+}
+.main .photoBlock .photo__hover {
+  position: relative;
+  top: -101.5%;
+  transition: opacity 0.25s ease-in-out;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.4588235294);
+}
+.main .photoBlock .photo__hover:hover {
+  opacity: 1;
+}
+.main .photoBlock .photo__hover--details, .main .photoBlock .photo__hover--lightbox, .main .photoBlock .photo__hover--reference, .main .photoBlock .photo__hover--category {
+  position: absolute;
+}
+.main .photoBlock .photo__hover--reference, .main .photoBlock .photo__hover--category {
+  font-weight: 500;
+  font-family: "poppins";
+  color: white;
+  bottom: 10px;
+}
+.main .photoBlock .photo__hover--details {
+  left: calc(50% - 23px);
+  top: calc(50% - 19px);
+}
+.main .photoBlock .photo__hover--lightbox {
+  top: 10px;
+  right: 10px;
+}
+.main .photoBlock .photo__hover--reference {
+  left: 15px;
+}
+.main .photoBlock .photo__hover--category {
+  right: 15px;
+}
+.main .photoBlock .photo--img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.main .single__container, .main .single--img {
   display: inline-block;
 }
-.main .photo__container {
+.main .single__container {
   border-bottom: 1px solid black;
   padding: 20px 0;
 }
-.main .photo__container--text, .main .photo__container--title {
-  text-transform: uppercase;
-  list-style: none;
-}
-.main .photo__container--title {
+.main .single__container--title {
   width: 75%;
   line-height: 100%;
-  margin: 0;
+  overflow-wrap: break-word;
 }
-.main .photo--img {
+.main .single--img {
   -o-object-fit: cover;
      object-fit: cover;
-  height: 100%;
-  width: 100%;
   margin-bottom: -6px;
 }
 .main .interested {
   border-bottom: 1px solid black;
-  width: 100%;
   height: 118px;
   gap: 2%;
   display: flex;
@@ -117,6 +184,7 @@ Text Domain:  motaphoto
 .main .interested__container--text {
   width: -moz-fit-content;
   width: fit-content;
+  font-weight: 300;
   font-family: "poppins";
 }
 .main .interested__container--button {
@@ -141,10 +209,9 @@ Text Domain:  motaphoto
 }
 .main .interested__nav--arrows {
   height: 35px;
-  margin: 0;
   font-size: 22px;
 }
-.main .interested__nav--arrows a {
+.main .interested__nav--arrow {
   width: 75px;
   display: inline-block;
   margin-left: 10px;
@@ -153,15 +220,36 @@ Text Domain:  motaphoto
 .main .interested__nav--thumbnails {
   height: 75px;
 }
-.main .interested__nav--thumbnails img {
+.main .interested__nav--thumbnail {
   margin-left: 10px;
   width: 75px;
   height: 75px;
 }
+.main .more {
+  padding: 60px 0 20px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.main .more--button {
+  min-width: 50px;
+  max-width: 250px;
+  height: 50px;
+  border: 0;
+  font-size: 12px;
+  background-color: #D8D8D8;
+}
+.main .more--button:hover {
+  background-color: #cbcbcb;
+  cursor: pointer;
+}
 
 .contact {
-  position: absolute;
-  width: 70vw;
+  height: calc(90vh - 140px);
+  overflow: auto;
+  max-height: 610px;
+  position: fixed;
+  width: calc(70vw - 10px);
   max-width: 600px;
   background-color: white;
   border: 5px solid black;
@@ -172,17 +260,16 @@ Text Domain:  motaphoto
   background-size: contain;
   font-size: 12px;
   font-weight: 500;
-  padding: 150px 0 25px 0;
-  margin: 80px calc((100vw - 600px) / 2) 0;
+  padding: 140px 0 0 0;
+  margin: 5vh calc(50vw - 300px);
   top: 0;
-  text-transform: uppercase;
-  list-style: none;
   transition: opacity 0.5s ease-in-out;
   opacity: 0;
   visibility: hidden;
-  /* when form appear */
-  /* when form disappears */
+  /* when object appear */
+  /* when object disappears */
   /* error message above the form */
+  /* form container */
 }
 .contact.toggled {
   opacity: 1;
@@ -195,17 +282,17 @@ Text Domain:  motaphoto
   transition: opacity 0.5s ease-in-out;
   opacity: 0;
   visibility: hidden;
-  /* when form appear */
-  /* when form disappears */
-  position: absolute;
+  /* when object appear */
+  /* when object disappears */
+  position: fixed;
   background-color: black;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   left: 0;
   top: 0;
 }
 .contact--background.toggled {
-  opacity: 0.5;
+  opacity: 0.75;
   visibility: visible;
 }
 .contact--background.hide {
@@ -257,6 +344,7 @@ Text Domain:  motaphoto
 .contact__form .wpcf7-submit {
   width: 100%;
   border-radius: 0;
+  min-width: 50px;
   height: 50px;
   border: 0;
   font-size: 12px;
@@ -269,6 +357,9 @@ Text Domain:  motaphoto
 .contact .screen-reader-response {
   display: none;
 }
+.contact .wpcf7 {
+  background-color: white;
+}
 
 .footer {
   height: 40px;
@@ -276,63 +367,14 @@ Text Domain:  motaphoto
 }
 .footer__nav {
   margin: 8px 0;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-transform: uppercase;
-  list-style: none;
 }
 .footer__nav--link {
   margin: 0 2.5%;
 }
 
-@media screen and (min-width: 1440px) {
-  .contact {
-    margin: 80px 420px;
-  }
-  .header__nav {
-    margin-right: 140px;
-  }
-  .header__logo {
-    margin-left: 140px;
-  }
-  .main {
-    margin: 0 150px;
-  }
-}
-/* desktop version */
-@media screen and (min-width: 900px) {
-  .header__nav--button {
-    display: none;
-  }
-  .main {
-    margin: 0 7vw;
-  }
-  .main .photo {
-    gap: 2%;
-    flex-direction: row-reverse;
-    display: flex;
-    align-items: end;
-  }
-  .main .paysage .photo__container {
-    width: 34%;
-  }
-  .main .paysage picture {
-    width: 64%;
-  }
-  .main .portrait .photo__container {
-    width: 49%;
-  }
-  .main .portrait picture {
-    width: 49%;
-  }
-  .main .interested__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
 /* mobile version */
 @media screen and (max-width: 899px) {
   .header {
@@ -340,24 +382,24 @@ Text Domain:  motaphoto
   }
   .header__nav--menu {
     font-size: 44px;
-    flex-direction: column;
     margin: 72px 0 0 0;
-    padding: 0 0 72px 0;
+    padding: 0;
     gap: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    flex-direction: column;
+    position: fixed;
     background-color: #E00000;
     height: calc(100vh - 72px);
-    width: 100%;
+    width: 100vw;
     left: 0;
     top: 0;
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
     visibility: hidden;
-    /* when form appear */
-    /* when form disappears */
+    /* when object appear */
+    /* when object disappears */
   }
   .header__nav--menu.toggled {
     opacity: 1;
@@ -379,11 +421,17 @@ Text Domain:  motaphoto
   .main {
     padding: 10px 0;
   }
-  .main .photo__container, .main .photo--img {
+  .main h2 {
+    font-size: 46px;
+  }
+  .main .home--header {
+    margin: -10px 0;
+  }
+  .main .single__container, .main .single--img {
     width: 80vw;
     padding: 20px 10vw;
   }
-  .main .photo__container--title {
+  .main .single__container--title {
     font-size: 46px;
     letter-spacing: 5px;
   }
@@ -393,17 +441,21 @@ Text Domain:  motaphoto
   }
   .main .interested__container {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    display: flex;
+    justify-content: space-between;
   }
   .main .interested__container--button {
     width: 100%;
-    max-width: none;
   }
   .main .interested__nav {
     display: none;
   }
   .contact {
-    padding: 20% 0 2% 0;
-    margin: 72px 15vw 0;
+    padding: calc(12% + 30px) 0 0 0;
+    margin: 5vh 15vw;
   }
   .footer, .footer__nav {
     height: 208px;
@@ -412,5 +464,61 @@ Text Domain:  motaphoto
     flex-direction: column;
     justify-content: space-evenly;
     margin: 0;
+  }
+}
+/* desktop version */
+@media screen and (min-width: 900px) {
+  .header__nav--button {
+    display: none;
+  }
+  .main {
+    margin: 0 7vw;
+  }
+  .main .photoBlock {
+    gap: 2%;
+    display: flex;
+    align-items: end;
+  }
+  .main .single {
+    gap: 2%;
+    flex-direction: row-reverse;
+    display: flex;
+    align-items: end;
+  }
+  .main .paysage .single__container {
+    width: 34%;
+  }
+  .main .paysage picture {
+    width: 64%;
+  }
+  .main .portrait .single__container {
+    width: 49%;
+  }
+  .main .portrait picture {
+    width: 49%;
+  }
+  .main .interested__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+/* wide screen version */
+@media screen and (min-width: 1440px) {
+  .header__nav {
+    margin-right: 140px;
+  }
+  .header__logo {
+    margin-left: 140px;
+  }
+  .main {
+    margin: 0 150px;
+  }
+  .main .home--header {
+    width: 1440px;
+    margin: -40px -150px;
+  }
+  .contact {
+    margin: 5vh 420px;
   }
 }/*# sourceMappingURL=style.css.map */

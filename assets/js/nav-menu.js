@@ -3,6 +3,9 @@
 /* @type {HTMLElement} */
 const siteNavigation = document.querySelector( '.header__nav' );
 
+/* @type {HTMLElement} */
+const siteHeader = document.querySelector( '.header' );
+
 /*
  * @param {HTMLElement} element
  * @param {string} attribute
@@ -10,14 +13,14 @@ const siteNavigation = document.querySelector( '.header__nav' );
  */
 const setAttribute = ( element, attribute, value ) => element.setAttribute( attribute, value );
 
-if ( siteNavigation ) {
+if ( siteNavigation && siteHeader ) {
     /* @type {HTMLElement} */
     const mobileButton = siteNavigation.querySelector( '.header__nav--button' );
 
     /* @type {HTMLElement} */
     const mobileMenu = siteNavigation.querySelector( '.header__nav--menu' );
 
-    if ( mobileButton ) {
+    if ( mobileButton && mobileMenu ) {
         /* @type {HTMLElement} */
         const mobileButtonImage = siteNavigation.querySelector( '.header__nav--buttonImg' );
 
@@ -32,6 +35,7 @@ if ( siteNavigation ) {
                 setAttribute( mobileButtonImage, 'src', sourceImage );
                 setAttribute( mobileButtonImage, 'alt', 'Ouvrir le menu de navigation' );
 
+                siteHeader.classList.toggle( 'fixed' );
                 mobileMenu.classList.toggle( 'hide' );
                 setTimeout( () => {
                     mobileMenu.classList.toggle( 'toggled' );
@@ -45,6 +49,7 @@ if ( siteNavigation ) {
                 setAttribute( mobileButtonImage, 'src', sourceImage );
                 setAttribute( mobileButtonImage, 'alt', 'Fermer le menu de navigation' );
 
+                siteHeader.classList.toggle( 'fixed' );
                 mobileMenu.classList.toggle( 'toggled' );
             }
         }

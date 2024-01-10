@@ -4,13 +4,16 @@
 const contactPopup = document.querySelector( '.contact' )
 
 /* @type {HTMLElements} */
-const contactButtons = document.querySelectorAll( '.contact--button, .interested__container--button' )
+const contactButtonHeader = document.querySelector( '.contact--button' )
+
+/* @type {HTMLElements} */
+const contactButtonSingle = document.querySelector( '.interested__container--button' )
 
 /* @type {HTMLElement} */
 const contactBackground = document.querySelector( '.contact--background' )
 
-if ( contactPopup && contactButtons && contactBackground) {
-    /* @type {HTMLElement} */
+if ( contactPopup && contactButtonHeader && contactBackground ) {
+    /* @type {URL} */
     const currentURL = window.location.href
 
     /* @param {HTMLElement} element */
@@ -24,12 +27,24 @@ if ( contactPopup && contactButtons && contactBackground) {
         toggle( contactPopup );
     }
 
-    contactButtons.forEach( function( contactButton ) {
-        contactButton.onclick = function() {
+    if ( contactButtonSingle ) {
+        /* @param {HTMLElement} element */
+        const photoRef = document.getElementsByName( 'reference-photo' )[0];
+
+        contactButtonSingle.onclick = function() {
             toggle( contactBackground );
             toggle( contactPopup );
+
+            if ( photoRef ) {
+                photoRef.value = ( document.querySelector( '.interested__container--button' ).id );
+            }
         }
-    })
+    }
+
+    contactButtonHeader.onclick = function() {
+        toggle( contactBackground );
+        toggle( contactPopup );
+    }
 
     contactBackground.onclick = function() {
         hide ( contactBackground );
