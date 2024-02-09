@@ -1,29 +1,33 @@
 <?php get_header(); ?>
 
-<?php 
-    $thumbnail = get_the_post_thumbnail( $post, 'full', [ 'class' => 'single--img width100 height100' ]);
+<?php
+    /* set variables to display in single photo page */
+    $thumbnail = get_the_post_thumbnail( $post, 'full', [ 'class' => 'single--img width100 height100 imgCover' ]);
     $reference = get_field( 'reference' );
     $category = get_the_terms( $post, 'categorie' )[0]->name;
     $format = get_the_terms( $post, 'format' )[0]->name;
     $type = get_field( 'type' );
     $date = substr( apply_filters( 'the_date', $post->post_date ), 0, 4);
+
+    /* set variables to get previous and next photo */
     $previousPost = get_the_ID() - 1;
     $nextPost = get_the_ID() + 1;
 
+    /* create variable "args" of 2 photos with the same category as the photo displayed */
     $args = array(
-        'post_type' => 'photo',
+        'post_type'      => 'photo',
         'posts_per_page' => 2,
-        'post__not_in' => array( get_the_ID(), $previousPost, $nextPost ),
-        'tax_query' => array(
+        'post__not_in'   => array( get_the_ID(), $previousPost, $nextPost ),
+        'tax_query'      => array(
             array(
                 'taxonomy' => 'categorie',
                 'field'    => 'slug',
-                'terms' => $category
+                'terms'    => $category
             )
         )
     );
-    $query = new WP_Query( $args );
 
+    /* add a special class to change the visual of the photo displayed */
     function photo_class_format( $orientation ) {
         if ( $orientation == "Paysage" ) {
             echo "paysage";
@@ -33,6 +37,7 @@
         }
     }
 
+    /* add an arrow that link to previous and next photo */
     function photo_nav_arrows( $previous, $next ) {
         if ( get_post( $next ) != null && get_post_type( $next ) == 'photo' ) {
             echo '<a class="interested__nav--arrow" href="' . get_post_permalink( $next ) . '">→</a>';
@@ -42,6 +47,7 @@
         }
     }
 
+    /* add the thumbnail of previous and next photo */
     function photo_nav_thumbnails( $previous, $next ) {
         if ( get_post( $next ) != null && get_post_type( $next ) == 'photo' ) {
             echo get_the_post_thumbnail( $next , 'thumbnail', [ 'class' => 'interested__nav--thumbnail' ]);
@@ -55,12 +61,12 @@
     <section class="single <?php photo_class_format( $format ); ?>">
         <?php echo $thumbnail; ?>
         <div class="single__container">
-            <h2 class="single__container--title noMargin caps"><?php the_title(); ?></h2>
-            <p class="single__container--texts caps">Référence : <?php echo $reference ?></p>
-            <p class="single__container--texts caps">Catégorie : <?php echo $category; ?></p>
-            <p class="single__container--texts caps">Format : <?php echo $format; ?></p>
-            <p class="single__container--texts caps">Type : <?php echo $type; ?></p>
-            <p class="single__container--texts caps">Année : <?php echo $date; ?></p>
+            <h2 class="single__container--title noMargin capsLock"><?php the_title(); ?></h2>
+            <p class="single__container--texts capsLock">Référence : <?php echo $reference ?></p>
+            <p class="single__container--texts capsLock">Catégorie : <?php echo $category; ?></p>
+            <p class="single__container--texts capsLock">Format : <?php echo $format; ?></p>
+            <p class="single__container--texts capsLock">Type : <?php echo $type; ?></p>
+            <p class="single__container--texts capsLock">Année : <?php echo $date; ?></p>
         </div>
     </section>
     <section class="interested width100">
@@ -78,7 +84,7 @@
         </div>
     </section>
     <section class="more">
-        <h3 class="more--title width100 caps">Vous aimerez aussi</h3>
+        <h3 class="more--title width100 capsLock">Vous aimerez aussi</h3>
         <?php include 'templates_part/photo-block.php'; ?>
         <button class="more--button width100" onclick="window.location.href='<?php echo home_url(); ?>';">Toutes les photos</button>
     </section>

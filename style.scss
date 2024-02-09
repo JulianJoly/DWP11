@@ -12,8 +12,39 @@ Text Domain:  motaphoto
 */
 
 @font-face {
-    font-family: 'space-mono';
-    src: url( '/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Regular.ttf' );
+    font-family: 'SpaceMono-Italic';
+    src: local( 'Space Mono Italic' ), local( 'SpaceMono-Italic' ),
+        url( '/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Italic.ttf' ) format( 'truetype' );
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SpaceMono-Regular';
+    src: local( 'Space Mono Regular' ), local( 'SpaceMono-Regular' ),
+        url( '/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Regular.ttf' ) format( 'truetype' );
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SpaceMono-BoldItalic';
+    src: local( 'Space Mono Bold Italic' ), local( 'SpaceMono-BoldItalic' ),
+        url( '/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-BoldItalic.ttf' ) format( 'truetype' );
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SpaceMono-Bold';
+    src: local( 'Space Mono Bold' ), local( 'SpaceMono-Bold' ),
+        url( '/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Bold.ttf' ) format( 'truetype' );
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -53,6 +84,19 @@ $grisMedium:#D8D8D8;
     }
 }
 
+@mixin ratio( $ratio ) {
+    @supports ( aspect-ratio: $ratio ) {
+        aspect-ratio: $ratio;
+    }
+    @supports not ( aspect-ratio: $ratio ) {
+        height: 962px;
+        @media screen and ( max-width: 899px ) {
+            height: 253px;
+        }
+    }
+    overflow: hidden;
+}
+
 @mixin toggle( $opacity ) {
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
@@ -81,16 +125,20 @@ $grisMedium:#D8D8D8;
 .body {
     max-width: 1440px;
     margin: auto;
-    font-family: 'space-mono';
+    font-family: 'SpaceMono-Regular';
     a {
         text-decoration: none;
         color: black;
         font-weight: 400;
     }
+    h1 {
+        font-family: 'SpaceMono-BoldItalic';
+        font-size: 96px;
+    }
     h2 {
+        font-family: 'SpaceMono-Italic';
         font-size: 66px;
         font-weight: 400;
-        font-style: italic;
     }
     h3 {
         font-size: 18px;
@@ -112,9 +160,12 @@ $grisMedium:#D8D8D8;
     .noPadding {
         padding: 0;
     }
-    .caps {
+    .capsLock {
         text-transform: uppercase;
         list-style: none;
+    }
+    .imgCover {
+        object-fit: cover;
     }
 }
 
@@ -148,22 +199,28 @@ $grisMedium:#D8D8D8;
 .main {
     padding: 40px 0;
 
-    .home {
-        &--header {
+    .hero {
+        @include flex(center, center, null);
+        &--img {
             width: 100vw;
-            height: auto;
             margin: -40px -7vw;
+            @include ratio( 720/481 );
+        }
+        &--title {
+            position: absolute;
+            font-family: "SpaceMono-BoldItalic";
+            -webkit-text-stroke-width: 3px;
+            -webkit-text-stroke-color: white;
+            color: transparent;
         }
     }
 
     .photoBlock {
-        margin: 40px 0;
         .photo {
-            width: 49%;
-            height: 495px;
+            @include ratio( 1/1 );
             &__hover {
                 position: relative;
-                top: -101.5%;
+                top: -101%;
                 transition: opacity 0.25s ease-in-out;
                 opacity: 0;
                 background: #00000075;
@@ -194,9 +251,6 @@ $grisMedium:#D8D8D8;
                     right: 15px;
                 }
             }
-            &--img {
-                object-fit: cover;
-            }
         }
     }
 
@@ -208,13 +262,11 @@ $grisMedium:#D8D8D8;
             border-bottom: 1px solid black;
             padding: 20px 0;
             &--title {
-                width: 75%;
                 line-height: 100%;
                 overflow-wrap: break-word;
             }
         }
         &--img {
-            object-fit: cover;
             margin-bottom: -6px;
         }
     }
@@ -374,6 +426,12 @@ $grisMedium:#D8D8D8;
 
 /* mobile version */
 @media screen and ( max-width: 899px ) {
+    .body {
+        h2 {
+            font-size: 46px;
+        }
+    }
+
     .header {
         height: 72px;
         &__nav {
@@ -400,12 +458,14 @@ $grisMedium:#D8D8D8;
     .main {
         padding: 10px 0;
 
-        h2 {
-            font-size: 46px;
+        .photoBlock {
+            .photo {
+                padding-bottom: 20px;
+            }
         }
 
-        .home {
-            &--header {
+        .hero {
+            &--img {
                 margin: -10px 0;
             }
         }
@@ -428,7 +488,6 @@ $grisMedium:#D8D8D8;
             padding: 10px 10vw;
             &__container {
                 width: 100%;
-                display: flex;
                 flex-wrap: wrap;
                 gap: 0 20px;
                 @include flex( null, space-between, null );
@@ -437,6 +496,16 @@ $grisMedium:#D8D8D8;
                 }
             }
             &__nav {
+                display: none;
+            }
+        }
+
+        .more {
+            padding: 0 10vw;
+            &--title {
+                text-align: center;
+            }
+            &--button {
                 display: none;
             }
         }
@@ -473,14 +542,23 @@ $grisMedium:#D8D8D8;
         margin: 0 7vw;
 
         .photoBlock {
+            margin: 40px 0;
             gap: 2%;
             @include flex( end, null, null );
+            .photo {
+                width: 49%;
+            }
         }
 
         .single {
             gap: 2%;
             flex-direction: row-reverse;
             @include flex( end, null, null );
+            &__container {
+                &--title {
+                    width: 75%;
+                }
+            }
         }
         
         .paysage {
@@ -527,8 +605,8 @@ $grisMedium:#D8D8D8;
     .main {
         margin: 0 150px;
 
-        .home {
-            &--header {
+        .hero {
+            &--img {
                 width: 1440px;
                 margin: -40px -150px;
             }

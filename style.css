@@ -12,8 +12,32 @@ Tags:         motaphoto
 Text Domain:  motaphoto
 */
 @font-face {
-  font-family: "space-mono";
-  src: url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Regular.ttf");
+  font-family: "SpaceMono-Italic";
+  src: local("Space Mono Italic"), local("SpaceMono-Italic"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpaceMono-Regular";
+  src: local("Space Mono Regular"), local("SpaceMono-Regular"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpaceMono-BoldItalic";
+  src: local("Space Mono Bold Italic"), local("SpaceMono-BoldItalic"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpaceMono-Bold";
+  src: local("Space Mono Bold"), local("SpaceMono-Bold"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "poppins";
@@ -31,17 +55,21 @@ Text Domain:  motaphoto
 .body {
   max-width: 1440px;
   margin: auto;
-  font-family: "space-mono";
+  font-family: "SpaceMono-Regular";
 }
 .body a {
   text-decoration: none;
   color: black;
   font-weight: 400;
 }
+.body h1 {
+  font-family: "SpaceMono-BoldItalic";
+  font-size: 96px;
+}
 .body h2 {
+  font-family: "SpaceMono-Italic";
   font-size: 66px;
   font-weight: 400;
-  font-style: italic;
 }
 .body h3 {
   font-size: 18px;
@@ -63,9 +91,13 @@ Text Domain:  motaphoto
 .body .noPadding {
   padding: 0;
 }
-.body .caps {
+.body .capsLock {
   text-transform: uppercase;
   list-style: none;
+}
+.body .imgCover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .header {
@@ -101,21 +133,59 @@ Text Domain:  motaphoto
 .main {
   padding: 40px 0;
 }
-.main .home--header {
-  width: 100vw;
-  height: auto;
-  margin: -40px -7vw;
+.main .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.main .photoBlock {
-  margin: 40px 0;
+.main .hero--img {
+  width: 100vw;
+  margin: -40px -7vw;
+  overflow: hidden;
+}
+@supports (aspect-ratio: 1.4968814969) {
+  .main .hero--img {
+    aspect-ratio: 1.4968814969;
+  }
+}
+@supports not (aspect-ratio: 1.4968814969) {
+  .main .hero--img {
+    height: 962px;
+  }
+  @media screen and (max-width: 899px) {
+    .main .hero--img {
+      height: 253px;
+    }
+  }
+}
+.main .hero--title {
+  position: absolute;
+  font-family: "SpaceMono-BoldItalic";
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: white;
+  color: transparent;
 }
 .main .photoBlock .photo {
-  width: 49%;
-  height: 495px;
+  overflow: hidden;
+}
+@supports (aspect-ratio: 1) {
+  .main .photoBlock .photo {
+    aspect-ratio: 1;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .main .photoBlock .photo {
+    height: 962px;
+  }
+  @media screen and (max-width: 899px) {
+    .main .photoBlock .photo {
+      height: 253px;
+    }
+  }
 }
 .main .photoBlock .photo__hover {
   position: relative;
-  top: -101.5%;
+  top: -101%;
   transition: opacity 0.25s ease-in-out;
   opacity: 0;
   background: rgba(0, 0, 0, 0.4588235294);
@@ -146,10 +216,6 @@ Text Domain:  motaphoto
 .main .photoBlock .photo__hover--category {
   right: 15px;
 }
-.main .photoBlock .photo--img {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
 .main .single__container, .main .single--img {
   display: inline-block;
 }
@@ -158,13 +224,10 @@ Text Domain:  motaphoto
   padding: 20px 0;
 }
 .main .single__container--title {
-  width: 75%;
   line-height: 100%;
   overflow-wrap: break-word;
 }
 .main .single--img {
-  -o-object-fit: cover;
-     object-fit: cover;
   margin-bottom: -6px;
 }
 .main .interested {
@@ -377,6 +440,9 @@ Text Domain:  motaphoto
 
 /* mobile version */
 @media screen and (max-width: 899px) {
+  .body h2 {
+    font-size: 46px;
+  }
   .header {
     height: 72px;
   }
@@ -421,10 +487,10 @@ Text Domain:  motaphoto
   .main {
     padding: 10px 0;
   }
-  .main h2 {
-    font-size: 46px;
+  .main .photoBlock .photo {
+    padding-bottom: 20px;
   }
-  .main .home--header {
+  .main .hero--img {
     margin: -10px 0;
   }
   .main .single__container, .main .single--img {
@@ -441,7 +507,6 @@ Text Domain:  motaphoto
   }
   .main .interested__container {
     width: 100%;
-    display: flex;
     flex-wrap: wrap;
     gap: 0 20px;
     display: flex;
@@ -451,6 +516,15 @@ Text Domain:  motaphoto
     width: 100%;
   }
   .main .interested__nav {
+    display: none;
+  }
+  .main .more {
+    padding: 0 10vw;
+  }
+  .main .more--title {
+    text-align: center;
+  }
+  .main .more--button {
     display: none;
   }
   .contact {
@@ -475,15 +549,22 @@ Text Domain:  motaphoto
     margin: 0 7vw;
   }
   .main .photoBlock {
+    margin: 40px 0;
     gap: 2%;
     display: flex;
     align-items: end;
+  }
+  .main .photoBlock .photo {
+    width: 49%;
   }
   .main .single {
     gap: 2%;
     flex-direction: row-reverse;
     display: flex;
     align-items: end;
+  }
+  .main .single__container--title {
+    width: 75%;
   }
   .main .paysage .single__container {
     width: 34%;
@@ -514,7 +595,7 @@ Text Domain:  motaphoto
   .main {
     margin: 0 150px;
   }
-  .main .home--header {
+  .main .hero--img {
     width: 1440px;
     margin: -40px -150px;
   }
