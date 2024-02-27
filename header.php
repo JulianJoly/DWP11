@@ -1,3 +1,22 @@
+<?php
+
+    /* if browser support webp format */
+    if ( $GLOBALS['modernBrowser'] ) {
+        /* use "webp" format */
+        $logo = get_theme_file_uri() . '/assets/img/logo.png.webp';
+        $buttonOpenNav = get_theme_file_uri() . '/assets/img/nav-menu-open.png.webp';
+    } else {
+        /* use "png" format */
+        $logo = get_theme_file_uri() . '/assets/img/logo.png';
+        $buttonOpenNav = get_theme_file_uri() . '/assets/img/nav-menu-open.png';
+    }
+
+    /* add JS variable to get current theme file path */
+    function themeFilePath() {
+        echo '<script type="text/javascript" defer>const themeFilePath = "' . get_theme_file_uri() . '";</script>';
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -5,11 +24,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Motaphoto</title>
         <?php wp_head(); ?>
+        <?php themeFilePath(); ?>
     </head>
     <body class="body">
         <header class="header width100">
-            <img src="<?php echo get_theme_file_uri() . '/assets/img/logo.png' ?>" alt="Logo du site" class="header__logo">
-            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" class="header__nav">
+            <img src="<?php echo $logo; ?>" alt="Logo du site" class="header__logo">
+            <nav role="navigation" aria-label="<?php _e( 'Menu principal', 'text-domain' ); ?>" class="header__nav">
                 <?php
                     wp_nav_menu([
                         'theme_location' => 'main-menu',
@@ -19,7 +39,7 @@
                     ]);
                 ?>
                 <button type="button" aria-expanded="false" aria-controls="primary-menu" class="header__nav--button">
-                    <img src="<?php echo get_theme_file_uri() . '/assets/img/nav-menu-open.png' ?>" alt="Ouvrir le menu de navigation" class="header__nav--buttonImg">
+                    <img src="<?php echo $buttonOpenNav; ?>" alt="Ouvrir le menu de navigation" class="header__nav--buttonImg">
                 </button>
             </nav>
         </header>

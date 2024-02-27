@@ -1,12 +1,19 @@
 <?php
 
+/* check if current browser support "webp" format */
+if ( strpos( $_SERVER['HTTP_ACCEPT'], 'image/webp' ) ) {
+    $modernBrowser = true;
+} else {
+    $modernBrowser = false;
+}
+
 /* adding nav menu to theme */
 function register_my_menu() {
     register_nav_menu( 'main-menu', __( 'Menu principal', 'text-domain' ) );
 }
 add_action( 'after_setup_theme', 'register_my_menu' );
 
-/* loading css and scripts */
+/* loading all css and scripts */
 function theme_enqueue_scripts() {
     wp_enqueue_style( 'motaphoto-style', get_stylesheet_uri() );
     wp_enqueue_script( 'nav-menu', get_theme_file_uri() . '/assets/js/nav-menu.js', array(), '1.0.0', array( 'strategy' => 'defer', ), true );
@@ -29,7 +36,7 @@ function add_contact_button( $items, $args ) {
 }
 add_filter( 'wp_nav_menu_items', 'add_contact_button', 10, 2 );
 
-/* request custom type post "photo" */
+/* ajax request for custom type post "photo" */
 function motaphoto_request_photos() {
     $query = new WP_Query([
         'post_type'      => 'photo',
@@ -37,7 +44,7 @@ function motaphoto_request_photos() {
         'post_status'    => 'publish'
     ]);
 
-    if( $query -> have_posts() ) {
+    if( $query->have_posts() ) {
         wp_send_json( $query );
     } else {
         wp_send_json( false );

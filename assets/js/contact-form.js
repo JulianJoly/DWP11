@@ -3,61 +3,65 @@
 /* @type {HTMLElement} */
 const contactPopup = document.querySelector( '.contact' )
 
-/* @type {HTMLElements} */
-const contactButtonHeader = document.querySelector( '.contact--button' )
-
-/* @type {HTMLElements} */
-const contactButtonSingle = document.querySelector( '.interested__container--button' )
-
 /* @type {HTMLElement} */
 const contactBackground = document.querySelector( '.contact--background' )
 
-if ( contactPopup && contactButtonHeader && contactBackground ) {
+/* if contact section and contact background exists */
+if ( contactPopup && contactBackground ) {
+
     /* @type {URL} */
     const currentURL = window.location.href
 
-    /* @param {HTMLElement} element */
-    const toggle = ( element ) => element.classList.toggle( 'toggled' );
+    /* @type {HTMLElements} */
+    const contactButtonHeader = document.querySelector( '.contact--button' )
+    const contactButtonSingle = document.querySelector( '.interested__container--button' )
 
-    /* @param {HTMLElement} element */
-    const hide = ( element ) => element.classList.toggle( 'hide' );
-
-    if ( currentURL.includes( '/#wpcf7-f21-o1' ) ) {
+    /* if contact form was submitted */
+    if ( currentURL.includes( '/#wpcf7-f21-o1' )) {
+        /* toggle (hide) contact form and background */
         toggle( contactBackground );
         toggle( contactPopup );
     }
 
+    /* if contact button in single page exist */
     if ( contactButtonSingle ) {
+
         /* @param {HTMLElement} element */
         const photoRef = document.getElementsByName( 'reference-photo' )[0];
 
+        /* wait for click on contact button in single page */
         contactButtonSingle.onclick = function() {
+
+            /* togle (show) contact form and background */
             toggle( contactBackground );
             toggle( contactPopup );
 
+            /* if element named 'refence-photo' exist (input in contact form) */
             if ( photoRef ) {
+
+                /* add the photo reference in the contact form input */
                 photoRef.value = ( document.querySelector( '.interested__container--button' ).id );
             }
         }
     }
 
+    /* wait for click on contact button in header */
     contactButtonHeader.onclick = function() {
-        toggle( contactBackground );
-        toggle( contactPopup );
+
+        /* togle (show/hide) contact form and background */
+        contactBackground.classList.toggle( 'toggled' );
+        contactPopup.classList.toggle( 'toggled' );
     }
 
+    /* wait for click on contact background */
     contactBackground.onclick = function() {
-        hide ( contactBackground );
-        hide ( contactPopup );
-        setTimeout( () => {
-            toggle( contactBackground );
-            hide ( contactBackground );
-            toggle( contactPopup );
-            hide ( contactPopup );
-        }, 500 );
+
+        /* togle (hide) contact form and background */
+        contactBackground.classList.toggle( 'toggled' );
+        contactPopup.classList.toggle( 'toggled' );
         
         if ( currentURL.includes( '/#wpcf7-f21-o1' ) ) {
             window.location.href = currentURL.replace( "/#wpcf7-f21-o1", "" );
         }
     }
-}
+} else { console.log( 'ERROR: can\'t find contact section and contact background' ); }

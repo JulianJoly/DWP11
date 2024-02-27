@@ -48,12 +48,12 @@ Text Domain:  motaphoto
 }
 
 @font-face {
-    font-family: 'poppins';
+    font-family: 'Poppins-Regular';
     src: url( '/motaphoto/wp-content/themes/motaphoto/assets/fonts/poppins/Poppins-Regular.ttf' );
 }
 
-$rouge:#E00000;
-$grisMedium:#D8D8D8;
+$red:#E00000;
+$buttonColor:#D8D8D8;
 
 @mixin flex( $align, $justify, $direction ) {
     display: flex;
@@ -77,14 +77,16 @@ $grisMedium:#D8D8D8;
     height: 50px;
     border: 0;
     font-size: 12px;
-    background-color: $grisMedium;
+    background-color: $buttonColor;
+
     &:hover {
-        background-color: darken( $grisMedium, 5% );
+        background-color: darken( $buttonColor, 5% );
         cursor: pointer;
     }
 }
 
 @mixin ratio( $ratio ) {
+    overflow: hidden;
     @supports ( aspect-ratio: $ratio ) {
         aspect-ratio: $ratio;
     }
@@ -94,31 +96,16 @@ $grisMedium:#D8D8D8;
             height: 253px;
         }
     }
-    overflow: hidden;
 }
 
-@mixin toggle( $opacity ) {
-    transition: opacity 0.5s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    /* when object appear */
+@mixin toggle( $opacity, $visibility, $toggledOpacity, $toggledVisibility ) {
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    opacity: $opacity;
+    visibility: $visibility;
+
     &.toggled {
-        opacity: $opacity;
-        visibility: visible;
-    }
-    /* when object disappears */
-    &.hide {
-        animation: hideToggle 0.5s ease-in-out both;
-    }
-}
-
-@keyframes hideToggle {
-    99% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-        visibility: hidden;
+        opacity: $toggledOpacity;
+        visibility: $toggledVisibility;
     }
 }
 
@@ -126,6 +113,7 @@ $grisMedium:#D8D8D8;
     max-width: 1440px;
     margin: auto;
     font-family: 'SpaceMono-Regular';
+
     a {
         text-decoration: none;
         color: black;
@@ -133,11 +121,11 @@ $grisMedium:#D8D8D8;
     }
     h1 {
         font-family: 'SpaceMono-BoldItalic';
-        font-size: 96px;
+        font-size: 6.65vw;
     }
     h2 {
         font-family: 'SpaceMono-Italic';
-        font-size: 66px;
+        font-size: 5vw;
         font-weight: 400;
     }
     h3 {
@@ -172,14 +160,15 @@ $grisMedium:#D8D8D8;
 .header {
     height: 80px;
     box-shadow: 0 30px 30px -30px #E5E5E5;
-    @include flex( center, space-between, null );
+    @include flex( center, space-between, null ); /* align-items, justify-content, flex-direction */
+
     &__nav {
         margin-right: 7vw;
-        @include flex( center, null, null );
+        @include flex( center, null, null ); /* align-items, justify-content, flex-direction */
+
         &--menu {
-            @include flex( center, null, null );
+            @include flex( center, null, null ); /* align-items, justify-content, flex-direction */
             gap: 50px;
-            
         }
         &--button {
             border: none;
@@ -190,7 +179,7 @@ $grisMedium:#D8D8D8;
         margin-left: 7vw;
     }
     &.fixed {
-        position: fixed;
+        position: sticky;
         top: 0;
         background-color: white;
     }
@@ -198,32 +187,41 @@ $grisMedium:#D8D8D8;
     
 .main {
     padding: 40px 0;
+    @include toggle( 1, visible, 0, hidden ); /* opacity, visibility, toggled opacity, toggled visibility */
 
     .hero {
-        @include flex(center, center, null);
+        @include flex(center, center, null); /* align-items, justify-content, flex-direction */
+
         &--img {
             width: 100vw;
+            height: auto;
             margin: -40px -7vw;
-            @include ratio( 720/481 );
+            @include ratio( 720/481 ); /* aspect-ratio */
         }
         &--title {
             position: absolute;
             font-family: "SpaceMono-BoldItalic";
-            -webkit-text-stroke-width: 3px;
+            -webkit-text-stroke-width: 0.2vw;
             -webkit-text-stroke-color: white;
             color: transparent;
         }
     }
 
+    .photoList {
+        margin-top: 100px;
+    }
+
     .photoBlock {
         .photo {
-            @include ratio( 1/1 );
+            @include ratio( 1/1 ); /* aspect-ratio */
+
             &__hover {
-                position: relative;
-                top: -101%;
+                position: sticky;
+                bottom: 0;
                 transition: opacity 0.25s ease-in-out;
                 opacity: 0;
                 background: #00000075;
+
                 &:hover {
                     opacity: 1;
                 }
@@ -232,7 +230,7 @@ $grisMedium:#D8D8D8;
                 }
                 &--reference, &--category {
                     font-weight: 500;
-                    font-family: 'poppins';
+                    font-family: 'Poppins-Regular';
                     color: white;
                     bottom: 10px;
                 }
@@ -261,6 +259,7 @@ $grisMedium:#D8D8D8;
         &__container {
             border-bottom: 1px solid black;
             padding: 20px 0;
+
             &--title {
                 line-height: 100%;
                 overflow-wrap: break-word;
@@ -275,26 +274,28 @@ $grisMedium:#D8D8D8;
         border-bottom: 1px solid black;
         height: 118px;
         gap: 2%;
-        @include flex( center, null, null );
+        @include flex( center, null, null ); /* align-items, justify-content, flex-direction */
+
         &__container, &__nav {
             width: 49%;
         }
         &__container {
             padding: 34px 0;
             display: inline-block;
+
             &--text {
-                width: fit-content;
                 font-weight: 300;
-                font-family: 'poppins';
+                font-family: 'Poppins-Regular';
             }
             &--button {
                 width: 15vw;
-                @include button( 250px );
+                @include button( 250px ); /* max-width */
             }
         }
         &__nav {
             direction: rtl;
             padding-top: 8px;
+
             &--arrows, &--thumbnails {
                 width: 170px;
             }
@@ -321,10 +322,7 @@ $grisMedium:#D8D8D8;
 
     .more {
         padding: 60px 0 20px 0;
-        @include flex( center, null, column );
-        &--button {
-            @include button( 250px );
-        }
+        @include flex( center, null, column ); /* align-items, justify-content, flex-direction */
     }
 }
 
@@ -347,10 +345,11 @@ $grisMedium:#D8D8D8;
     padding: 140px 0 0 0;
     margin: 5vh calc( 50vw - 300px );
     top: 0;
-    @include toggle( 1 );
+    @include toggle( 0, hidden, 1, visible ); /* opacity, visibility, toggled opacity, toggled visibility */
+
     &--background {
-        @include toggle( 0.75 );
-        @include background( 100%, black);
+        @include toggle( 0, hidden, 0.75, visible ); /* opacity, visibility, toggled opacity, toggled visibility */
+        @include background( 100%, black); /* height ,background-color */
     }
     &--button {
         &:hover {
@@ -361,6 +360,7 @@ $grisMedium:#D8D8D8;
         width: 70%;
         max-width: 270px;
         margin: auto;
+
         p {
             margin: 0 0 20px 0;
         }
@@ -393,20 +393,20 @@ $grisMedium:#D8D8D8;
         }
         /* error message under the form */
         .wpcf7-response-output, .wpcf7-not-valid-tip {
-            color: $rouge;
+            color: $red;
         }
         /* submit button of the form */
         .wpcf7-submit {
             width: 100%;
             border-radius: 0;
-            @include button( null );
+            @include button( null ); /* max-width */
         }
     }
     /* error message above the form */
     .screen-reader-response {
         display: none;
     }
-    /* form container */
+    /* form container div */
     .wpcf7 {
         background-color: white;
     }
@@ -415,9 +415,11 @@ $grisMedium:#D8D8D8;
 .footer {
     height: 40px;
     border-top: 1px solid black;
+
     &__nav {
         margin: 8px 0;
-        @include flex( center, center, null );
+        @include flex( center, center, null ); /* align-items, justify-content, flex-direction */
+
         &--link {
             margin: 0 2.5%;
         }
@@ -426,6 +428,7 @@ $grisMedium:#D8D8D8;
 
 /* mobile version */
 @media screen and ( max-width: 899px ) {
+
     .body {
         h2 {
             font-size: 46px;
@@ -434,15 +437,17 @@ $grisMedium:#D8D8D8;
 
     .header {
         height: 72px;
+
         &__nav {
             &--menu {
                 font-size: 44px;
                 margin: 72px 0 0 0;
                 padding: 0;
                 gap: 5%;
-                @include flex( center, center, column );
-                @include background( calc( 100vh - 72px ), $rouge );
-                @include toggle( 1 );
+                @include flex( center, center, column ); /* align-items, justify-content, flex-direction */
+                @include background( calc( 100vh - 72px ), $red ); /* height ,background-color */
+                @include toggle( 0, hidden, 1, visible ); /* opacity, visibility, toggled opacity, toggled visibility */
+
                 a {
                     color: white;
                 }
@@ -469,6 +474,10 @@ $grisMedium:#D8D8D8;
                 margin: -10px 0;
             }
         }
+
+        .photoList {
+            padding: 0 10vw;
+        }
     
         .single {
             &__container, &--img {
@@ -478,7 +487,6 @@ $grisMedium:#D8D8D8;
             &__container {
                 &--title {
                     font-size: 46px;
-                    letter-spacing: 5px;
                 }
             }
         }
@@ -486,11 +494,17 @@ $grisMedium:#D8D8D8;
         .interested {
             width: 80vw;
             padding: 10px 10vw;
+
             &__container {
                 width: 100%;
                 flex-wrap: wrap;
                 gap: 0 20px;
-                @include flex( null, space-between, null );
+                @include flex( null, space-around, null ); /* align-items, justify-content, flex-direction */
+
+                &--text {
+                    width: 100%;
+                    max-width: 250px;
+                }
                 &--button {
                     width: 100%;
                 }
@@ -502,6 +516,7 @@ $grisMedium:#D8D8D8;
 
         .more {
             padding: 0 10vw;
+
             &--title {
                 text-align: center;
             }
@@ -530,6 +545,7 @@ $grisMedium:#D8D8D8;
 
 /* desktop version */
 @media screen and ( min-width: 900px ) {
+
     .header {
         &__nav {
             &--button {
@@ -543,17 +559,21 @@ $grisMedium:#D8D8D8;
 
         .photoBlock {
             margin: 40px 0;
-            gap: 2%;
-            @include flex( end, null, null );
+            row-gap: 1.75vw;
+            flex-wrap: wrap;
+            @include flex( null, space-between, null ); /* align-items, justify-content, flex-direction */
+
             .photo {
                 width: 49%;
+                min-width: 49%;
             }
         }
 
         .single {
             gap: 2%;
             flex-direction: row-reverse;
-            @include flex( end, null, null );
+            @include flex( end, null, null ); /* align-items, justify-content, flex-direction */
+
             &__container {
                 &--title {
                     width: 75%;
@@ -585,7 +605,7 @@ $grisMedium:#D8D8D8;
 
         .interested {
             &__container {
-                @include flex( center, space-between, null );
+                @include flex( center, space-between, null ); /* align-items, justify-content, flex-direction */
             }
         }
     }
@@ -593,6 +613,16 @@ $grisMedium:#D8D8D8;
 
 /* wide screen version */
 @media screen and ( min-width: 1440px ) {
+
+    .body {
+        h1 {
+            font-size: 96px;
+        }
+        h2 {
+            font-size: 66px;
+        }
+    }
+
     .header {
         &__nav {
             margin-right: 140px;
@@ -603,13 +633,20 @@ $grisMedium:#D8D8D8;
     }
 
     .main {
-        margin: 0 150px;
+        margin: 0 100px;
 
         .hero {
             &--img {
                 width: 1440px;
-                margin: -40px -150px;
+                margin: -40px -100px;
             }
+            &--title {
+                -webkit-text-stroke-width: 3px;
+            }
+        }
+
+        .photoBlock {
+            row-gap: 25px;
         }
     }
 

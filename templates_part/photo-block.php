@@ -1,24 +1,34 @@
 <?php
-    /* variables for buttons link */
-    $buttonDetails = get_theme_file_uri() . '/assets/img/button-details.png';
-    $buttonLightbox = get_theme_file_uri() . '/assets/img/button-lightbox.png';
+
+    /* if browser support "webp" format */
+    if ( $GLOBALS['modernBrowser'] ) {
+        /* use "webp" format */
+        $buttonDetails = get_theme_file_uri() . '/assets/img/button-details.png.webp';
+        $buttonLightbox = get_theme_file_uri() . '/assets/img/button-lightbox.png.webp';
+    } else {
+        /* use "png" format */
+        $buttonDetails = get_theme_file_uri() . '/assets/img/button-details.png';
+        $buttonLightbox = get_theme_file_uri() . '/assets/img/button-lightbox.png';
+    }
 
     echo '<div class="photoBlock width100">';
 
     /* if variable "args" exist */
     if ( $args ) {
+        /* create query with "args" */
         $query = new WP_Query( $args );
     }
 
-    /* if query is empty */
-    if ( !$query->have_posts() ) {
+    /* if query is empty and current page is displaying a photo */
+    if ( !$query->have_posts() && is_singular( 'photo' ) ) {
+        /* create query with 2 photos that is not the current photo and not previous/next photos */
         $query = new WP_Query( array( 'post_type' => 'photo', 'posts_per_page' => 2, 'post__not_in' => array( get_the_ID(), $previousPost, $nextPost ) ));
     }
 
     /* if query has posts inside */
     if ( $query->have_posts() ) {
 
-        /* display all posts inside query */
+        /* display all posts inside the query */
         while ( $query->have_posts() ) {
             $query->the_post();
             echo '<div class="photo">';

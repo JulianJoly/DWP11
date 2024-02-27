@@ -13,7 +13,7 @@
     $previousPost = get_the_ID() - 1;
     $nextPost = get_the_ID() + 1;
 
-    /* create variable "args" of 2 photos with the same category as the photo displayed */
+    /* create variable "args" of 2 photos with the same category as the photo displayed that is not the previous/current/next photo */
     $args = array(
         'post_type'      => 'photo',
         'posts_per_page' => 2,
@@ -86,7 +86,6 @@
     <section class="more">
         <h3 class="more--title width100 capsLock">Vous aimerez aussi</h3>
         <?php include 'templates_part/photo-block.php'; ?>
-        <button class="more--button width100" onclick="window.location.href='<?php echo home_url(); ?>';">Toutes les photos</button>
     </section>
 
 <?php get_footer(); ?>
