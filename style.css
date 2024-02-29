@@ -172,6 +172,23 @@ Text Domain:  motaphoto
 }
 .main .photoList {
   margin-top: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* align-items, justify-content, flex-direction */
+}
+.main .photoList--button {
+  min-width: 50px;
+  max-width: 250px;
+  height: 50px;
+  border: 0;
+  font-size: 12px;
+  background-color: #D8D8D8;
+  /* max-width */
+}
+.main .photoList--button:hover {
+  background-color: #cbcbcb;
+  cursor: pointer;
 }
 .main .photoBlock .photo {
   overflow: hidden;

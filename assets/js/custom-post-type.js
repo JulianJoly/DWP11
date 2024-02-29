@@ -17,22 +17,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
     })
 
     .then( function( data ) {
-        /* @type {URL} */
-        const currentURL = window.location.href
-
-        /* @type {HTMLElement} */
-        const customPostContainer = document.querySelector( '.photo' );
-
-        if ( customPostContainer ) {
-            /* @type {HTMLElement} */
-            const moreContainer = document.querySelector( '.more__container' );
-
-            data.posts.forEach( function( post ) {
-                if ( currentURL.includes( post.post_name ) ) {
-                    console.log(post);
-                }
-            });
-        }
+        console.log(data.posts);
+        console.log(customPostType_js.ajax_url);
     })
 
     .catch( function( error ) {

@@ -85,7 +85,7 @@
     </section>
     <section class="more">
         <h3 class="more--title width100 capsLock">Vous aimerez aussi</h3>
-        <?php include 'templates_part/photo-block.php'; ?>
+        <?php get_template_part('templates_part/photo', 'block');/* include 'templates_part/photo-block.php'; */ ?>
     </section>
 
 <?php get_footer(); ?>

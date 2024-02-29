@@ -7,29 +7,32 @@ if ( strpos( $_SERVER['HTTP_ACCEPT'], 'image/webp' ) ) {
     $modernBrowser = false;
 }
 
-/* adding nav menu to theme */
+/* add a navigation menu to the theme */
 function register_my_menu() {
     register_nav_menu( 'main-menu', __( 'Menu principal', 'text-domain' ) );
 }
 add_action( 'after_setup_theme', 'register_my_menu' );
 
-/* loading all css and scripts */
+/* load all css and scripts */
 function theme_enqueue_scripts() {
     wp_enqueue_style( 'motaphoto-style', get_stylesheet_uri() );
     wp_enqueue_script( 'nav-menu', get_theme_file_uri() . '/assets/js/nav-menu.js', array(), '1.0.0', array( 'strategy' => 'defer', ), true );
     wp_enqueue_script( 'contact-form', get_theme_file_uri() . '/assets/js/contact-form.js', array(), '1.0.0', array( 'strategy' => 'defer', ), true );
-    wp_enqueue_script( 'custom-post-type', get_theme_file_uri() . '/assets/js/custom-post-type.js', array( 'jquery' ), '1.0.0', array( 'strategy' => 'defer', ), true );
-    wp_localize_script( 'custom-post-type', 'customPostType_js', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+    /* condition to only use ajax in front page */
+    if ( is_front_page() ) {
+        wp_enqueue_script( 'custom-post-type', get_theme_file_uri() . '/assets/js/custom-post-type.js', array( 'jquery' ), '1.0.0', array( 'strategy' => 'defer', ), true );
+        wp_localize_script( 'custom-post-type', 'customPostType_js', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+    }
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
 
-/* PHP error fix */
+/* fix an php error */
 remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
 add_action( 'shutdown', function() {
    while ( @ob_end_flush() );
 } );
 
-/* adding contact button to nav menu */
+/* add a contact button to the nav menu */
 function add_contact_button( $items, $args ) {
     $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a class="contact--button">Contact</a></li>';
     return $items;

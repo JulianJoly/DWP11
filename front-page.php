@@ -23,7 +23,8 @@
         <h1 class="hero--title capsLock noMargin">photographe event</h1>
     </section>
     <section class="photoList">
-        <?php include 'templates_part/photo-block.php'; ?>
+        <?php get_template_part('templates_part/photo', 'block');/* include 'templates_part/photo-block.php'; */ ?>
+        <button class="photoList--button width100">Charger plus</button>
     </section>
 
 <?php get_footer(); ?>

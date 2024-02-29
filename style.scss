@@ -190,7 +190,7 @@ $buttonColor:#D8D8D8;
     @include toggle( 1, visible, 0, hidden ); /* opacity, visibility, toggled opacity, toggled visibility */
 
     .hero {
-        @include flex(center, center, null); /* align-items, justify-content, flex-direction */
+        @include flex( center, center, null ); /* align-items, justify-content, flex-direction */
 
         &--img {
             width: 100vw;
@@ -209,6 +209,11 @@ $buttonColor:#D8D8D8;
 
     .photoList {
         margin-top: 100px;
+        @include flex( center, null, column ); /* align-items, justify-content, flex-direction */
+
+        &--button {
+            @include button( 250px ); /* max-width */
+        }
     }
 
     .photoBlock {
