@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <?php
-    /* set variables to display in single photo page */
+    /* set variables to display in current single photo page */
     $thumbnail = get_the_post_thumbnail( $post, 'full', [ 'class' => 'single--img width100 height100 imgCover' ]);
     $reference = get_field( 'reference' );
     $category = get_the_terms( $post, 'categorie' )[0]->name;
@@ -85,7 +85,7 @@
     </section>
     <section class="more">
         <h3 class="more--title width100 capsLock">Vous aimerez aussi</h3>
-        <?php get_template_part('templates_part/photo', 'block');/* include 'templates_part/photo-block.php'; */ ?>
+        <div class="photoBlock width100"><?php get_template_part( 'templates_part/photo', 'block', $args ); ?></div>
     </section>
 
 <?php get_footer(); ?>

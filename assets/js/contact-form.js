@@ -2,8 +2,6 @@
 
 /* @type {HTMLElement} */
 const contactPopup = document.querySelector( '.contact' )
-
-/* @type {HTMLElement} */
 const contactBackground = document.querySelector( '.contact--background' )
 
 /* if contact section and contact background exists */
@@ -26,7 +24,7 @@ if ( contactPopup && contactBackground ) {
     /* if contact button in single page exist */
     if ( contactButtonSingle ) {
 
-        /* @param {HTMLElement} element */
+        /* @type {HTMLElement} element */
         const photoRef = document.getElementsByName( 'reference-photo' )[0];
 
         /* wait for click on contact button in single page */
@@ -38,16 +36,14 @@ if ( contactPopup && contactBackground ) {
 
             /* if element named 'refence-photo' exist (input in contact form) */
             if ( photoRef ) {
-
                 /* add the photo reference in the contact form input */
                 photoRef.value = ( document.querySelector( '.interested__container--button' ).id );
             }
         }
-    }
+    } /* no error to display if variable is missing */
 
     /* wait for click on contact button in header */
     contactButtonHeader.onclick = function() {
-
         /* togle (show/hide) contact form and background */
         contactBackground.classList.toggle( 'toggled' );
         contactPopup.classList.toggle( 'toggled' );

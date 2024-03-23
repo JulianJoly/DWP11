@@ -8,7 +8,7 @@
             <?php wp_footer(); ?>
         </footer>
         <aside>
-            <?php include 'templates_part/contact.php'; ?>
+            <?php get_template_part( 'templates_part/contact' ); ?>
         </aside>
     </body>
 </html>

@@ -1,27 +1,61 @@
-'use-strict'
+( function($) {
 
-document.addEventListener( 'DOMContentLoaded', function() {
-    let formData = new FormData();
-    formData.append( 'action', 'request_photos' );
-    
-    fetch( customPostType_js.ajax_url, {
-        method: 'POST',
-        body: formData,
-    })
+    /* when the DOM is fully loaded */
+    $(document).ready( function() {
 
-    .then( function( response ) {
-        if ( !response.ok ) {
-            throw new Error( 'Network response error.' );
-        }
-        return response.json();
-    })
+        /* @type {number} */
+        let pageDisplayed = 1;
 
-    .then( function( data ) {
-        console.log(data.posts);
-        console.log(customPostType_js.ajax_url);
-    })
+        /* when cliking on "load more" button */
+        $( '.photoList--button' ).click( function() {
 
-    .catch( function( error ) {
-        console.error( 'There was a problem with the fetch operation: ', error );
+            /* load 1 more page of posts */
+            pageDisplayed ++;
+
+            /* @type {URL} */
+            const ajaxURL = $(this).data( 'ajaxurl' );
+
+            /* @type {array} */
+            const data = {
+                action:        $(this).data( 'action' ),
+                nonce:         $(this).data( 'nonce' ),
+                pageDisplayed: pageDisplayed
+            }
+
+            /* launch an ajax request */
+            fetch( ajaxURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Cache-Control': 'no-cache',
+                },
+                body: new URLSearchParams( data ),
+            })
+
+            /* convert response received to JSON */
+            .then( response => response.json() )
+
+            /* handle response received */
+            .then( response => {
+
+                /* if the ajax request was sucessful */
+                if ( response.success ) {
+
+                    /* add the content of the ajax request to the HTML */
+                    $( '.photoBlock' ).append( response.data );
+
+                    /* if this is the last page of content */
+                    if ( response.data.includes( 'last-page' )) {
+
+                        /* hide the "load more" button */
+                        $( '.photoList--button' ).hide();
+                    }
+                } else {
+
+                    /* notify the user of the error */
+                    alert( response.data )
+                }
+            });
+        });
     });
-});
+})( jQuery );

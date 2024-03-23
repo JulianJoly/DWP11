@@ -1,12 +1,12 @@
 <?php
 
-    /* if browser support webp format */
-    if ( $GLOBALS['modernBrowser'] ) {
-        /* use "webp" format */
+    /* if browser support WEBP format */
+    if ( $GLOBALS[ 'modernBrowser' ] ) {
+        /* use WEBP format */
         $logo = get_theme_file_uri() . '/assets/img/logo.png.webp';
         $buttonOpenNav = get_theme_file_uri() . '/assets/img/nav-menu-open.png.webp';
     } else {
-        /* use "png" format */
+        /* use PNG format */
         $logo = get_theme_file_uri() . '/assets/img/logo.png';
         $buttonOpenNav = get_theme_file_uri() . '/assets/img/nav-menu-open.png';
     }

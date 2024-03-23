@@ -2,15 +2,11 @@
 
 /* @type {HTMLElement} */
 const siteHeader = document.querySelector( '.header' );
-
-/* @type {HTMLElement} */
 const siteMain = document.querySelector( '.main' );
 
-/*
- * @param {HTMLElement} element
- * @param {string} attribute
- * @param {bool} value
- */
+/* @param {HTMLElement} element */
+/* @param {string} attribute */
+/* @param {bool} value */
 const setAttribute = ( element, attribute, value ) => element.setAttribute( attribute, value );
 
 /* if site header and site main exists */
@@ -18,8 +14,6 @@ if ( siteHeader && siteMain ) {
 
     /* @type {HTMLElement} */
     const navButton = siteHeader.querySelector( '.header__nav--button' );
-
-    /* @type {HTMLElement} */
     const navMenu = siteHeader.querySelector( '.header__nav--menu' );
 
     /* if nav button and nav menu exists */
@@ -33,7 +27,7 @@ if ( siteHeader && siteMain ) {
 
             /* @type {URL} */
             let navButtonImagePath = themeFilePath + '/assets/img/';
-            
+
             /* @type {bool} */
             const modernBrowser = navButtonImage.src.includes( '.webp' );
 

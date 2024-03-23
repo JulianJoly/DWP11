@@ -1,20 +1,20 @@
-<?php get_header(); ?>
+<?php get_header();
 
-<?php
     /* get a random photo */
     $randomPhoto = get_posts( 
         array(
             'orderby'        => 'rand',
+            'post_status'    => 'publish',
             'post_type'      => 'photo',
             'posts_per_page' => 1
         ) 
     );
 
-    /* get all photos to display in front page */
+    /* get 8 photos to display in front page */
     $args = array(
-        'orderby'        => 'rand',
+        'post_status'    => 'publish',
         'post_type'      => 'photo',
-        'posts_per_page' => 8
+        'posts_per_page' => 8,
     );
 ?>
 
@@ -23,8 +23,12 @@
         <h1 class="hero--title capsLock noMargin">photographe event</h1>
     </section>
     <section class="photoList">
-        <?php get_template_part('templates_part/photo', 'block');/* include 'templates_part/photo-block.php'; */ ?>
-        <button class="photoList--button width100">Charger plus</button>
+        <div class="photoBlock width100"><?php get_template_part( 'templates_part/photo', 'block', $args ); ?></div>
+        <button class="photoList--button width100"
+            data-nonce="<?php echo wp_create_nonce( 'motaphoto_request_photos' ); ?>"
+            data-action="motaphoto_request_photos"
+            data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>"
+        >Charger plus</button>
     </section>
 
 <?php get_footer(); ?>
