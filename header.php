@@ -35,7 +35,7 @@
                         'theme_location' => 'main-menu',
                         'container'      => false,
                         'menu_id'        => 'primary-menu',
-                        'menu_class'     => 'header__nav--menu capsLock'
+                        'menu_class'     => 'header__nav--menu uppercase'
                     ]);
                 ?>
                 <button type="button" aria-expanded="false" aria-controls="primary-menu" class="header__nav--button">

@@ -20,7 +20,7 @@ if ( isset( $args )) {
     /* if query is empty and current page is single page */
     if ( !$query->have_posts() && is_singular( 'photo' )) {
         /* create query with 2 photos that is not the current photo and not previous/next photos */
-        $query = new WP_Query( array( 'post_type' => 'photo', 'posts_per_page' => 2, 'post__not_in' => array( get_the_ID(), $previousPost, $nextPost ) ));
+        $query = new WP_Query( array( 'post_type' => 'photo', 'posts_per_page' => 2, 'post__not_in' => array( get_the_ID(), get_the_ID() -1, get_the_ID() +1 )));
     }
 
     /* if the query have posts inside */
@@ -38,30 +38,29 @@ if ( isset( $args )) {
                     <a class="photo__hover--lightbox">
                         <img src="<?php echo $buttonLightbox; ?>">
                     </a>
-                    <p class="photo__hover--reference noMargin capsLock"><?php the_field( 'reference' ); ?></p>
-                    <p class="photo__hover--category noMargin capsLock"><?php get_the_terms( $post, 'categorie' )[0]->name; ?></p>
+                    <p class="photo__hover--reference noMargin uppercase"><?php the_field( 'reference' ); ?></p>
+                    <p class="photo__hover--category noMargin uppercase"><?php echo get_the_terms( $post, 'categorie' )[0]->name; ?></p>
                 </div>
             </div> <?php
         }
 
         /* if variable "paged" exist inside "args" variable */
         if ( isset( $args[ 'paged' ])) {
-
             /* if this is the last page of posts to display */
             if ( $args[ 'paged' ] == $query->max_num_pages ) {
                 /* notify JS */ ?>
-                <meta class="last-page" /> <?php
+                <span class="last-page"></span> <?php
             }
         }
 
     } else {
-        /* display an error */ ?>
-        <p>Une erreur est survenue lors de l'affichage des photos.</p> <?php
+        /* display empty query error */ ?>
+        <p>Aucune photo ne correspond aux filtres.</p> <?php
     }
+
+    wp_reset_postdata();
 
 } else {
     /* display an error */ ?>
     <p>Une erreur est survenue lors de l'affichage des photos.</p> <?php
 }
-
-/* wp_reset_postdata(); */

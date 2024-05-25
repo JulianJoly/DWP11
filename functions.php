@@ -22,6 +22,7 @@ function theme_enqueue_scripts() {
     wp_enqueue_script( 'contact-form', get_theme_file_uri() . '/assets/js/contact-form.js', array(), '1.0', array( 'strategy' => 'defer', ), true );
     /* only using ajax on front page */
     if ( is_front_page() ) {
+        wp_enqueue_script( 'custom-select', get_theme_file_uri() . '/assets/js/custom-select.js', array(), '1.0', array( 'strategy' => 'defer', ), true );
         wp_enqueue_script( 'custom-post-type', get_theme_file_uri() . '/assets/js/custom-post-type.js', array( 'jquery' ), '1.0', array( 'strategy' => 'defer', ), true );
         wp_localize_script( 'custom-post-type', 'customPostType_js', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
     }
@@ -47,17 +48,49 @@ function motaphoto_request_photos() {
     	wp_send_json_error( "Vous n’avez pas l’autorisation d’effectuer cette action.", 403 );
   	}
 
-    if ( isset( $_POST[ 'pageDisplayed' ])) {
-    	$pageDisplayed = intval( $_POST[ 'pageDisplayed' ]);
+    if ( isset( $_POST[ 'paged' ])) {
+    	$pageDisplayed = intval( $_POST[ 'paged' ]);
   	} else {
         wp_send_json_error( "Le numéro de la page à affiché est manquant.", 404 );
+    }
+
+    if ( isset( $_POST[ 'category' ])) {
+    	$categorySelected = strval( $_POST[ 'category' ]);
+        if ( !empty( $categorySelected )) {
+            $category = array(
+                'taxonomy' => 'categorie',
+                'field'    => 'slug',
+                'terms'    => $categorySelected,
+            );
+        }
+  	}
+
+    if ( isset( $_POST[ 'format' ])) {
+    	$formatSelected = strval( $_POST[ 'format' ]);
+        if ( !empty( $formatSelected )) {
+            $format = array(
+                'taxonomy' => 'format',
+                'field'    => 'slug',
+                'terms'    => $formatSelected,
+            );
+        }
+  	}
+
+    if ( isset( $_POST[ 'order' ])) {
+        $orderSelected = strval( $_POST[ 'order' ]);
     }
 
     $args = array(
         'post_status'    => 'publish',
         'post_type'      => 'photo',
         'posts_per_page' => 8,
-        'paged'          => $pageDisplayed
+        'orderby'        => 'date',
+        'order'          => $orderSelected,
+        'paged'          => $pageDisplayed,
+        'tax_query'      => array(
+            $category,
+            $format
+        )
     );
 
     ob_start();

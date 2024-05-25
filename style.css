@@ -82,13 +82,19 @@ Text Domain:  motaphoto
 .body .noPadding {
   padding: 0;
 }
-.body .capsLock {
+.body .uppercase {
   text-transform: uppercase;
   list-style: none;
 }
 .body .imgCover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+.body .hidden {
+  display: none;
+}
+.body .pointer {
+  cursor: pointer;
 }
 
 .header {
@@ -97,17 +103,22 @@ Text Domain:  motaphoto
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: row;
   /* align-items, justify-content, flex-direction */
 }
 .header__nav {
   margin-right: 7vw;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
   /* align-items, justify-content, flex-direction */
 }
 .header__nav--menu {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
   /* align-items, justify-content, flex-direction */
   gap: 50px;
 }
@@ -139,6 +150,7 @@ Text Domain:  motaphoto
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   /* align-items, justify-content, flex-direction */
 }
 .main .hero--img {
@@ -170,18 +182,89 @@ Text Domain:  motaphoto
   -webkit-text-stroke-color: white;
   color: transparent;
 }
+@keyframes identifier {}
 .main .photoList {
   margin-top: 100px;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
   /* align-items, justify-content, flex-direction */
+}
+.main .photoList__filters--container {
+  width: 49%;
+}
+.main .photoList__filters .customSelect__selecter, .main .photoList__filters .customSelect .customOption {
+  line-height: 42px;
+  width: 220px;
+  font-family: "Poppins-Regular";
+  font-size: 12px;
+  font-weight: 500;
+  color: #313144;
+  padding: 0 19px;
+}
+.main .photoList__filters .customSelect__selecter, .main .photoList__filters .customSelect__optionList {
+  border: 1.3px solid #B8BBC2;
+}
+.main .photoList__filters .customSelect__selecter {
+  border-radius: 8px;
+  transition: border-radius 0.4s, border-color 0.4s;
+  transition-timing-function: cubic-bezier(1, 0, 1, 0);
+  animation: both;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
+}
+.main .photoList__filters .customSelect__selecter[aria-expanded=true] {
+  border-color: #215AFF;
+  border-radius: 8px 8px 0 0;
+  transition-timing-function: cubic-bezier(0, 1, 0, 1);
+}
+.main .photoList__filters .customSelect__selecter[aria-expanded=true]:after {
+  background-image: url(assets/img/chevron-up.png);
+}
+.main .photoList__filters .customSelect__selecter:after {
+  content: "";
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background-image: url(assets/img/chevron-down.png);
+}
+.main .photoList__filters .customSelect__optionList, .main .photoList__filters .customSelect .customOption--last {
+  border-radius: 0 0 8px 8px;
+}
+.main .photoList__filters .customSelect__optionList {
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  max-height: 300px;
+  overflow: hidden;
+  display: initial;
+  transition: max-height 0.4s linear, border-width 0.4s linear;
+  border-top: none;
+}
+.main .photoList__filters .customSelect__optionList.hidden {
+  max-height: 0;
+  border-width: 0px;
+}
+.main .photoList__filters .customSelect__optionList .customOption:hover {
+  background-color: #FFD6D6;
+}
+.main .photoList__filters .customSelect__optionList .customOption:active {
+  background-color: #FE5858;
+}
+.main .photoList__filters .customSelect__optionList .customOption--selected {
+  color: white;
+  background-color: #E00000;
 }
 .main .photoList--button {
   min-width: 50px;
   max-width: 250px;
   height: 50px;
   border: 0;
+  font-family: "SpaceMono-Regular";
   font-size: 12px;
   background-color: #D8D8D8;
   /* max-width */
@@ -214,7 +297,7 @@ Text Domain:  motaphoto
   bottom: 0;
   transition: opacity 0.25s ease-in-out;
   opacity: 0;
-  background: rgba(0, 0, 0, 0.4588235294);
+  background: rgba(0, 0, 0, 0.6);
 }
 .main .photoBlock .photo__hover:hover {
   opacity: 1;
@@ -262,6 +345,8 @@ Text Domain:  motaphoto
   gap: 2%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
   /* align-items, justify-content, flex-direction */
 }
 .main .interested__container, .main .interested__nav {
@@ -281,6 +366,7 @@ Text Domain:  motaphoto
   max-width: 250px;
   height: 50px;
   border: 0;
+  font-family: "SpaceMono-Regular";
   font-size: 12px;
   background-color: #D8D8D8;
   /* max-width */
@@ -318,6 +404,7 @@ Text Domain:  motaphoto
   padding: 60px 0 20px 0;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
   /* align-items, justify-content, flex-direction */
 }
@@ -331,7 +418,7 @@ Text Domain:  motaphoto
   max-width: 600px;
   background-color: white;
   border: 5px solid black;
-  z-index: 1;
+  z-index: 99;
   background-image: url(assets/img/contact-header.png);
   background-position-y: 10px;
   background-repeat: repeat-x;
@@ -418,6 +505,7 @@ Text Domain:  motaphoto
   min-width: 50px;
   height: 50px;
   border: 0;
+  font-family: "SpaceMono-Regular";
   font-size: 12px;
   background-color: #D8D8D8;
   /* max-width */
@@ -442,6 +530,7 @@ Text Domain:  motaphoto
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   /* align-items, justify-content, flex-direction */
 }
 .footer__nav--link {
@@ -504,6 +593,22 @@ Text Domain:  motaphoto
   .main .photoList {
     padding: 0 10vw;
     margin-bottom: 10px;
+    margin-top: 30px;
+  }
+  .main .photoList__filters {
+    width: -moz-min-content;
+    width: min-content;
+    margin-bottom: 30px;
+  }
+  .main .photoList__filters--container {
+    width: 100%;
+  }
+  .main .photoList__filters select {
+    width: 260px;
+    margin-top: 10px;
+  }
+  .main .photoList .customSelect {
+    margin-bottom: 5px;
   }
   .main .single__container, .main .single--img {
     width: 80vw;
@@ -521,7 +626,9 @@ Text Domain:  motaphoto
     flex-wrap: wrap;
     gap: 0 20px;
     display: flex;
+    align-items: baseline;
     justify-content: space-around;
+    flex-direction: row;
     /* align-items, justify-content, flex-direction */
   }
   .main .interested__container--text {
@@ -569,18 +676,39 @@ Text Domain:  motaphoto
     row-gap: 1.75vw;
     flex-wrap: wrap;
     display: flex;
+    align-items: baseline;
     justify-content: space-between;
+    flex-direction: row;
     /* align-items, justify-content, flex-direction */
   }
   .main .photoBlock .photo {
     width: 49%;
     min-width: 49%;
   }
+  .main .photoList__filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    /* align-items, justify-content, flex-direction */
+  }
+  .main .photoList__filters--container {
+    max-width: 607px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    /* align-items, justify-content, flex-direction */
+  }
+  .main .photoList__filters select {
+    max-width: 260px;
+  }
   .main .single {
     gap: 2%;
-    flex-direction: row-reverse;
     display: flex;
     align-items: end;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
     /* align-items, justify-content, flex-direction */
   }
   .main .single__container--title {
@@ -602,6 +730,7 @@ Text Domain:  motaphoto
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
     /* align-items, justify-content, flex-direction */
   }
 }

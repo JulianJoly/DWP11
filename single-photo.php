@@ -61,12 +61,12 @@
     <section class="single <?php photo_class_format( $format ); ?>">
         <?php echo $thumbnail; ?>
         <div class="single__container">
-            <h2 class="single__container--title noMargin capsLock"><?php the_title(); ?></h2>
-            <p class="single__container--texts capsLock">Référence : <?php echo $reference ?></p>
-            <p class="single__container--texts capsLock">Catégorie : <?php echo $category; ?></p>
-            <p class="single__container--texts capsLock">Format : <?php echo $format; ?></p>
-            <p class="single__container--texts capsLock">Type : <?php echo $type; ?></p>
-            <p class="single__container--texts capsLock">Année : <?php echo $date; ?></p>
+            <h2 class="single__container--title noMargin uppercase"><?php the_title(); ?></h2>
+            <p class="single__container--texts uppercase">Référence : <?php echo $reference ?></p>
+            <p class="single__container--texts uppercase">Catégorie : <?php echo $category; ?></p>
+            <p class="single__container--texts uppercase">Format : <?php echo $format; ?></p>
+            <p class="single__container--texts uppercase">Type : <?php echo $type; ?></p>
+            <p class="single__container--texts uppercase">Année : <?php echo $date; ?></p>
         </div>
     </section>
     <section class="interested width100">
@@ -84,7 +84,7 @@
         </div>
     </section>
     <section class="more">
-        <h3 class="more--title width100 capsLock">Vous aimerez aussi</h3>
+        <h3 class="more--title width100 uppercase">Vous aimerez aussi</h3>
         <div class="photoBlock width100"><?php get_template_part( 'templates_part/photo', 'block', $args ); ?></div>
     </section>
 

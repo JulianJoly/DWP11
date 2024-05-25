@@ -77,5 +77,5 @@ if ( siteHeader && siteMain ) {
 
             }
         }
-    } else { console.log( 'ERROR: can\'t find navigation button and menu' ); }
-} else { console.log( 'ERROR: can\'t find header and main' ); }
+    } else { console.log( "ERROR: can't find navigation button and menu" ); }
+} else { console.log( "ERROR: can't find header and main" ); }
