@@ -1,57 +1,81 @@
 'use_strict'
 
 /* @type {HTMLElement} */
-const siteNavigation = document.querySelector( '.header__nav' );
-
-/* @type {HTMLElement} */
 const siteHeader = document.querySelector( '.header' );
+const siteMain = document.querySelector( '.main' );
 
-/*
- * @param {HTMLElement} element
- * @param {string} attribute
- * @param {bool} value
- */
+/* @param {HTMLElement} element */
+/* @param {string} attribute */
+/* @param {bool} value */
 const setAttribute = ( element, attribute, value ) => element.setAttribute( attribute, value );
 
-if ( siteNavigation && siteHeader ) {
-    /* @type {HTMLElement} */
-    const mobileButton = siteNavigation.querySelector( '.header__nav--button' );
+/* if site header and site main exists */
+if ( siteHeader && siteMain ) {
 
     /* @type {HTMLElement} */
-    const mobileMenu = siteNavigation.querySelector( '.header__nav--menu' );
+    const navButton = siteHeader.querySelector( '.header__nav--button' );
+    const navMenu = siteHeader.querySelector( '.header__nav--menu' );
 
-    if ( mobileButton && mobileMenu ) {
+    /* if nav button and nav menu exists */
+    if ( navButton && navMenu ) {
+
         /* @type {HTMLElement} */
-        const mobileButtonImage = siteNavigation.querySelector( '.header__nav--buttonImg' );
+        const navButtonImage = siteHeader.querySelector( '.header__nav--buttonImg' );
 
-        mobileButton.onclick = function() {
+        /* wait for click on nav button in header */
+        navButton.onclick = function() {
+
             /* @type {URL} */
-            let sourceImage = window.location.origin  + '/motaphoto/wp-content/themes/motaphoto/assets/img/'; /* changer la valeur avant la mise en ligne */
-            console.log(sourceImage);
-            
-            if ( mobileButton.getAttribute( 'aria-expanded' ) === 'true' ) {
-                sourceImage += 'nav-menu-open.png'
-                setAttribute( mobileButton, 'aria-expanded', 'false' );
-                setAttribute( mobileButtonImage, 'src', sourceImage );
-                setAttribute( mobileButtonImage, 'alt', 'Ouvrir le menu de navigation' );
+            let navButtonImagePath = themeFilePath + '/assets/img/';
 
-                siteHeader.classList.toggle( 'fixed' );
-                mobileMenu.classList.toggle( 'hide' );
-                setTimeout( () => {
-                    mobileMenu.classList.toggle( 'toggled' );
-                    mobileMenu.classList.toggle( 'hide' );
-                }, 500 );
-            }
-            
-            else {
-                sourceImage += 'nav-menu-close.png'
-                setAttribute( mobileButton, 'aria-expanded', 'true' );
-                setAttribute( mobileButtonImage, 'src', sourceImage );
-                setAttribute( mobileButtonImage, 'alt', 'Fermer le menu de navigation' );
+            /* @type {bool} */
+            const modernBrowser = navButtonImage.src.includes( '.webp' );
 
+            /* if nav menu is open */
+            if ( navButton.getAttribute( 'aria-expanded' ) === 'true' ) {
+
+                /* if browser support webp format */
+                if ( modernBrowser ) {
+                    /* use webp format */
+                    navButtonImagePath += 'nav-menu-open.png.webp';
+                } else {
+                    /* use png format */
+                    navButtonImagePath += 'nav-menu-open.png';
+                }
+
+                /* set aria-expanded to false, change button icon + alt value */
+                setAttribute( navButton, 'aria-expanded', 'false' );
+                setAttribute( navButtonImage, 'src', navButtonImagePath );
+                setAttribute( navButtonImage, 'alt', 'Ouvrir le menu de navigation' );
+
+                /* toggle (stick) header, toggle (hide) nav menu, toggle (show) site main */
                 siteHeader.classList.toggle( 'fixed' );
-                mobileMenu.classList.toggle( 'toggled' );
+                navMenu.classList.toggle( 'toggled' );
+                siteMain.classList.toggle( 'toggled' );
+
+            /* else if nav menu is closed */
+            } else if ( navButton.getAttribute( 'aria-expanded' ) === 'false' ) {
+
+                /* check if webp images are supported */
+                if ( modernBrowser ) {
+                    /* use webp format */
+                    navButtonImagePath += 'nav-menu-close.png.webp';
+                } else {
+                    /* use png format */
+                    navButtonImagePath += 'nav-menu-close.png';
+                }
+
+                /* set aria-expanded to false, change button icon + alt value */
+                setAttribute( navButton, 'aria-expanded', 'true' );
+                setAttribute( navButtonImage, 'src', navButtonImagePath );
+                setAttribute( navButtonImage, 'alt', 'Fermer le menu de navigation' );
+
+                /* toggle (unstick) header, (show) nav menu, toggle (hide) site main */
+                siteHeader.classList.toggle( 'fixed' );
+                navMenu.classList.toggle( 'toggled' );
+                siteMain.classList.toggle( 'toggled' );
+
             }
         }
-    }
-}
+    } else { console.log( "ERROR: can't find navigation button and menu" ); }
+} else { console.log( "ERROR: can't find header and main" ); }

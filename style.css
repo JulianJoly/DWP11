@@ -12,36 +12,55 @@ Tags:         motaphoto
 Text Domain:  motaphoto
 */
 @font-face {
-  font-family: "space-mono";
-  src: url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Regular.ttf");
+  font-family: "SpaceMono-Italic";
+  src: local("Space Mono Italic"), local("SpaceMono-Italic"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }
 @font-face {
-  font-family: "poppins";
-  src: url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/poppins/Poppins-Regular.ttf");
+  font-family: "SpaceMono-Regular";
+  src: local("Space Mono Regular"), local("SpaceMono-Regular"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
-@keyframes hideToggle {
-  99% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+@font-face {
+  font-family: "SpaceMono-BoldItalic";
+  src: local("Space Mono Bold Italic"), local("SpaceMono-BoldItalic"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SpaceMono-Bold";
+  src: local("Space Mono Bold"), local("SpaceMono-Bold"), url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/space-mono/SpaceMono-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url("/motaphoto/wp-content/themes/motaphoto/assets/fonts/poppins/Poppins-Regular.ttf");
 }
 .body {
   max-width: 1440px;
   margin: auto;
-  font-family: "space-mono";
+  font-family: "SpaceMono-Regular";
 }
 .body a {
   text-decoration: none;
   color: black;
   font-weight: 400;
 }
+.body h1 {
+  font-family: "SpaceMono-BoldItalic";
+  font-size: 6.65vw;
+}
 .body h2 {
-  font-size: 66px;
+  font-family: "SpaceMono-Italic";
+  font-size: 5vw;
   font-weight: 400;
-  font-style: italic;
 }
 .body h3 {
   font-size: 18px;
@@ -63,9 +82,19 @@ Text Domain:  motaphoto
 .body .noPadding {
   padding: 0;
 }
-.body .caps {
+.body .uppercase {
   text-transform: uppercase;
   list-style: none;
+}
+.body .imgCover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.body .hidden {
+  display: none;
+}
+.body .pointer {
+  cursor: pointer;
 }
 
 .header {
@@ -74,15 +103,23 @@ Text Domain:  motaphoto
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
 }
 .header__nav {
   margin-right: 7vw;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
 }
 .header__nav--menu {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
   gap: 50px;
 }
 .header__nav--button {
@@ -93,32 +130,174 @@ Text Domain:  motaphoto
   margin-left: 7vw;
 }
 .header.fixed {
-  position: fixed;
+  position: sticky;
   top: 0;
   background-color: white;
 }
 
 .main {
   padding: 40px 0;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+  /* opacity, visibility, toggled opacity, toggled visibility */
 }
-.main .home--header {
+.main.toggled {
+  opacity: 0;
+  visibility: hidden;
+}
+.main .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
+}
+.main .hero--img {
   width: 100vw;
   height: auto;
   margin: -40px -7vw;
+  overflow: hidden;
+  /* aspect-ratio */
 }
-.main .photoBlock {
-  margin: 40px 0;
+@supports (aspect-ratio: 1.4968814969) {
+  .main .hero--img {
+    aspect-ratio: 1.4968814969;
+  }
+}
+@supports not (aspect-ratio: 1.4968814969) {
+  .main .hero--img {
+    height: 962px;
+  }
+  @media screen and (max-width: 899px) {
+    .main .hero--img {
+      height: 253px;
+    }
+  }
+}
+.main .hero--title {
+  position: absolute;
+  font-family: "SpaceMono-BoldItalic";
+  -webkit-text-stroke-width: 0.2vw;
+  -webkit-text-stroke-color: white;
+  color: transparent;
+}
+@keyframes identifier {}
+.main .photoList {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  /* align-items, justify-content, flex-direction */
+}
+.main .photoList__filters--container {
+  width: 49%;
+}
+.main .photoList__filters .customSelect__selecter, .main .photoList__filters .customSelect .customOption {
+  line-height: 42px;
+  width: 220px;
+  font-family: "Poppins-Regular";
+  font-size: 12px;
+  font-weight: 500;
+  color: #313144;
+  padding: 0 19px;
+}
+.main .photoList__filters .customSelect__selecter, .main .photoList__filters .customSelect__optionList {
+  border: 1.3px solid #B8BBC2;
+}
+.main .photoList__filters .customSelect__selecter {
+  border-radius: 8px;
+  transition: border-radius 0.4s, border-color 0.4s;
+  transition-timing-function: cubic-bezier(1, 0, 1, 0);
+  animation: both;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
+}
+.main .photoList__filters .customSelect__selecter[aria-expanded=true] {
+  border-color: #215AFF;
+  border-radius: 8px 8px 0 0;
+  transition-timing-function: cubic-bezier(0, 1, 0, 1);
+}
+.main .photoList__filters .customSelect__selecter[aria-expanded=true]:after {
+  background-image: url(assets/img/chevron-up.png);
+}
+.main .photoList__filters .customSelect__selecter:after {
+  content: "";
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background-image: url(assets/img/chevron-down.png);
+}
+.main .photoList__filters .customSelect__optionList, .main .photoList__filters .customSelect .customOption--last {
+  border-radius: 0 0 8px 8px;
+}
+.main .photoList__filters .customSelect__optionList {
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  max-height: 300px;
+  overflow: hidden;
+  display: initial;
+  transition: max-height 0.4s linear, border-width 0.4s linear;
+  border-top: none;
+}
+.main .photoList__filters .customSelect__optionList.hidden {
+  max-height: 0;
+  border-width: 0px;
+}
+.main .photoList__filters .customSelect__optionList .customOption:hover {
+  background-color: #FFD6D6;
+}
+.main .photoList__filters .customSelect__optionList .customOption:active {
+  background-color: #FE5858;
+}
+.main .photoList__filters .customSelect__optionList .customOption--selected {
+  color: white;
+  background-color: #E00000;
+}
+.main .photoList--button {
+  min-width: 50px;
+  max-width: 250px;
+  height: 50px;
+  border: 0;
+  font-family: "SpaceMono-Regular";
+  font-size: 12px;
+  background-color: #D8D8D8;
+  /* max-width */
+}
+.main .photoList--button:hover {
+  background-color: #cbcbcb;
+  cursor: pointer;
 }
 .main .photoBlock .photo {
-  width: 49%;
-  height: 495px;
+  overflow: hidden;
+  /* aspect-ratio */
+}
+@supports (aspect-ratio: 1) {
+  .main .photoBlock .photo {
+    aspect-ratio: 1;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .main .photoBlock .photo {
+    height: 962px;
+  }
+  @media screen and (max-width: 899px) {
+    .main .photoBlock .photo {
+      height: 253px;
+    }
+  }
 }
 .main .photoBlock .photo__hover {
-  position: relative;
-  top: -101.5%;
+  position: sticky;
+  bottom: 0;
   transition: opacity 0.25s ease-in-out;
   opacity: 0;
-  background: rgba(0, 0, 0, 0.4588235294);
+  background: rgba(0, 0, 0, 0.6);
 }
 .main .photoBlock .photo__hover:hover {
   opacity: 1;
@@ -128,7 +307,7 @@ Text Domain:  motaphoto
 }
 .main .photoBlock .photo__hover--reference, .main .photoBlock .photo__hover--category {
   font-weight: 500;
-  font-family: "poppins";
+  font-family: "Poppins-Regular";
   color: white;
   bottom: 10px;
 }
@@ -146,10 +325,6 @@ Text Domain:  motaphoto
 .main .photoBlock .photo__hover--category {
   right: 15px;
 }
-.main .photoBlock .photo--img {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
 .main .single__container, .main .single--img {
   display: inline-block;
 }
@@ -158,13 +333,10 @@ Text Domain:  motaphoto
   padding: 20px 0;
 }
 .main .single__container--title {
-  width: 75%;
   line-height: 100%;
   overflow-wrap: break-word;
 }
 .main .single--img {
-  -o-object-fit: cover;
-     object-fit: cover;
   margin-bottom: -6px;
 }
 .main .interested {
@@ -173,6 +345,9 @@ Text Domain:  motaphoto
   gap: 2%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
 }
 .main .interested__container, .main .interested__nav {
   width: 49%;
@@ -182,10 +357,8 @@ Text Domain:  motaphoto
   display: inline-block;
 }
 .main .interested__container--text {
-  width: -moz-fit-content;
-  width: fit-content;
   font-weight: 300;
-  font-family: "poppins";
+  font-family: "Poppins-Regular";
 }
 .main .interested__container--button {
   width: 15vw;
@@ -193,8 +366,10 @@ Text Domain:  motaphoto
   max-width: 250px;
   height: 50px;
   border: 0;
+  font-family: "SpaceMono-Regular";
   font-size: 12px;
   background-color: #D8D8D8;
+  /* max-width */
 }
 .main .interested__container--button:hover {
   background-color: #cbcbcb;
@@ -229,19 +404,9 @@ Text Domain:  motaphoto
   padding: 60px 0 20px 0;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
-}
-.main .more--button {
-  min-width: 50px;
-  max-width: 250px;
-  height: 50px;
-  border: 0;
-  font-size: 12px;
-  background-color: #D8D8D8;
-}
-.main .more--button:hover {
-  background-color: #cbcbcb;
-  cursor: pointer;
+  /* align-items, justify-content, flex-direction */
 }
 
 .contact {
@@ -253,7 +418,7 @@ Text Domain:  motaphoto
   max-width: 600px;
   background-color: white;
   border: 5px solid black;
-  z-index: 1;
+  z-index: 99;
   background-image: url(assets/img/contact-header.png);
   background-position-y: 10px;
   background-repeat: repeat-x;
@@ -263,40 +428,33 @@ Text Domain:  motaphoto
   padding: 140px 0 0 0;
   margin: 5vh calc(50vw - 300px);
   top: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
   opacity: 0;
   visibility: hidden;
-  /* when object appear */
-  /* when object disappears */
+  /* opacity, visibility, toggled opacity, toggled visibility */
   /* error message above the form */
-  /* form container */
+  /* form container div */
 }
 .contact.toggled {
   opacity: 1;
   visibility: visible;
 }
-.contact.hide {
-  animation: hideToggle 0.5s ease-in-out both;
-}
 .contact--background {
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
   opacity: 0;
   visibility: hidden;
-  /* when object appear */
-  /* when object disappears */
+  /* opacity, visibility, toggled opacity, toggled visibility */
   position: fixed;
   background-color: black;
   height: 100%;
   width: 100vw;
   left: 0;
   top: 0;
+  /* height ,background-color */
 }
 .contact--background.toggled {
   opacity: 0.75;
   visibility: visible;
-}
-.contact--background.hide {
-  animation: hideToggle 0.5s ease-in-out both;
 }
 .contact--button:hover {
   cursor: pointer;
@@ -347,8 +505,10 @@ Text Domain:  motaphoto
   min-width: 50px;
   height: 50px;
   border: 0;
+  font-family: "SpaceMono-Regular";
   font-size: 12px;
   background-color: #D8D8D8;
+  /* max-width */
 }
 .contact__form .wpcf7-submit:hover {
   background-color: #cbcbcb;
@@ -370,6 +530,8 @@ Text Domain:  motaphoto
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  /* align-items, justify-content, flex-direction */
 }
 .footer__nav--link {
   margin: 0 2.5%;
@@ -377,6 +539,9 @@ Text Domain:  motaphoto
 
 /* mobile version */
 @media screen and (max-width: 899px) {
+  .body h2 {
+    font-size: 46px;
+  }
   .header {
     height: 72px;
   }
@@ -389,24 +554,22 @@ Text Domain:  motaphoto
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    /* align-items, justify-content, flex-direction */
     position: fixed;
     background-color: #E00000;
     height: calc(100vh - 72px);
     width: 100vw;
     left: 0;
     top: 0;
-    transition: opacity 0.5s ease-in-out;
+    /* height ,background-color */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     opacity: 0;
     visibility: hidden;
-    /* when object appear */
-    /* when object disappears */
+    /* opacity, visibility, toggled opacity, toggled visibility */
   }
   .header__nav--menu.toggled {
     opacity: 1;
     visibility: visible;
-  }
-  .header__nav--menu.hide {
-    animation: hideToggle 0.5s ease-in-out both;
   }
   .header__nav--menu a {
     color: white;
@@ -421,11 +584,31 @@ Text Domain:  motaphoto
   .main {
     padding: 10px 0;
   }
-  .main h2 {
-    font-size: 46px;
+  .main .photoBlock .photo {
+    padding-bottom: 20px;
   }
-  .main .home--header {
+  .main .hero--img {
     margin: -10px 0;
+  }
+  .main .photoList {
+    padding: 0 10vw;
+    margin-bottom: 10px;
+    margin-top: 30px;
+  }
+  .main .photoList__filters {
+    width: -moz-min-content;
+    width: min-content;
+    margin-bottom: 30px;
+  }
+  .main .photoList__filters--container {
+    width: 100%;
+  }
+  .main .photoList__filters select {
+    width: 260px;
+    margin-top: 10px;
+  }
+  .main .photoList .customSelect {
+    margin-bottom: 5px;
   }
   .main .single__container, .main .single--img {
     width: 80vw;
@@ -433,7 +616,6 @@ Text Domain:  motaphoto
   }
   .main .single__container--title {
     font-size: 46px;
-    letter-spacing: 5px;
   }
   .main .interested {
     width: 80vw;
@@ -441,16 +623,31 @@ Text Domain:  motaphoto
   }
   .main .interested__container {
     width: 100%;
-    display: flex;
     flex-wrap: wrap;
     gap: 0 20px;
     display: flex;
-    justify-content: space-between;
+    align-items: baseline;
+    justify-content: space-around;
+    flex-direction: row;
+    /* align-items, justify-content, flex-direction */
+  }
+  .main .interested__container--text {
+    width: 100%;
+    max-width: 250px;
   }
   .main .interested__container--button {
     width: 100%;
   }
   .main .interested__nav {
+    display: none;
+  }
+  .main .more {
+    padding: 0 10vw;
+  }
+  .main .more--title {
+    text-align: center;
+  }
+  .main .more--button {
     display: none;
   }
   .contact {
@@ -475,15 +672,47 @@ Text Domain:  motaphoto
     margin: 0 7vw;
   }
   .main .photoBlock {
-    gap: 2%;
+    margin: 40px 0;
+    row-gap: 1.75vw;
+    flex-wrap: wrap;
     display: flex;
-    align-items: end;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-direction: row;
+    /* align-items, justify-content, flex-direction */
+  }
+  .main .photoBlock .photo {
+    width: 49%;
+    min-width: 49%;
+  }
+  .main .photoList__filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    /* align-items, justify-content, flex-direction */
+  }
+  .main .photoList__filters--container {
+    max-width: 607px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    /* align-items, justify-content, flex-direction */
+  }
+  .main .photoList__filters select {
+    max-width: 260px;
   }
   .main .single {
     gap: 2%;
-    flex-direction: row-reverse;
     display: flex;
     align-items: end;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    /* align-items, justify-content, flex-direction */
+  }
+  .main .single__container--title {
+    width: 75%;
   }
   .main .paysage .single__container {
     width: 34%;
@@ -501,10 +730,18 @@ Text Domain:  motaphoto
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
+    /* align-items, justify-content, flex-direction */
   }
 }
 /* wide screen version */
 @media screen and (min-width: 1440px) {
+  .body h1 {
+    font-size: 96px;
+  }
+  .body h2 {
+    font-size: 66px;
+  }
   .header__nav {
     margin-right: 140px;
   }
@@ -512,11 +749,17 @@ Text Domain:  motaphoto
     margin-left: 140px;
   }
   .main {
-    margin: 0 150px;
+    margin: 0 100px;
   }
-  .main .home--header {
+  .main .hero--img {
     width: 1440px;
-    margin: -40px -150px;
+    margin: -40px -100px;
+  }
+  .main .hero--title {
+    -webkit-text-stroke-width: 3px;
+  }
+  .main .photoBlock {
+    row-gap: 25px;
   }
   .contact {
     margin: 5vh 420px;
