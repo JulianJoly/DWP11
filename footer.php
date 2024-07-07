@@ -1,3 +1,12 @@
+<?php
+    
+    get_template_part( 'templates_part/contact' );
+    if ( is_front_page() ) {
+        get_template_part( 'templates_part/lightbox' );
+    }
+
+?>
+
         </main>
         <footer class="footer">
             <ul class="footer__nav noPadding uppercase">
@@ -7,8 +16,5 @@
             </ul>
             <?php wp_footer(); ?>
         </footer>
-        <aside>
-            <?php get_template_part( 'templates_part/contact' ); ?>
-        </aside>
     </body>
 </html>

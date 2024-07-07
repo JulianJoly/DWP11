@@ -35,7 +35,7 @@ if ( isset( $args )) {
                     <a class="photo__hover--details" href="<?php echo the_permalink(); ?>">
                         <img src="<?php echo $buttonDetails; ?>">
                     </a>
-                    <a class="photo__hover--lightbox">
+                    <a class="photo__hover--lightbox pointer">
                         <img src="<?php echo $buttonLightbox; ?>">
                     </a>
                     <p class="photo__hover--reference noMargin uppercase"><?php the_field( 'reference' ); ?></p>
@@ -49,13 +49,13 @@ if ( isset( $args )) {
             /* if this is the last page of posts to display */
             if ( $args[ 'paged' ] == $query->max_num_pages ) {
                 /* notify JS */ ?>
-                <span class="last-page"></span> <?php
+                <span class="last-page hidden"></span> <?php
             }
         }
 
     } else {
         /* display empty query error */ ?>
-        <p>Aucune photo ne correspond aux filtres.</p> <?php
+        <p>Aucune des photos ne correspond aux filtres.</p> <?php
     }
 
     wp_reset_postdata();

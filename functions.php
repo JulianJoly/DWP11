@@ -20,16 +20,18 @@ function theme_enqueue_scripts() {
     wp_enqueue_style( 'motaphoto-style', get_stylesheet_uri() );
     wp_enqueue_script( 'nav-menu', get_theme_file_uri() . '/assets/js/nav-menu.js', array(), '1.0', array( 'strategy' => 'defer', ), true );
     wp_enqueue_script( 'contact-form', get_theme_file_uri() . '/assets/js/contact-form.js', array(), '1.0', array( 'strategy' => 'defer', ), true );
-    /* only using ajax on front page */
     if ( is_front_page() ) {
         wp_enqueue_script( 'custom-select', get_theme_file_uri() . '/assets/js/custom-select.js', array(), '1.0', array( 'strategy' => 'defer', ), true );
         wp_enqueue_script( 'custom-post-type', get_theme_file_uri() . '/assets/js/custom-post-type.js', array( 'jquery' ), '1.0', array( 'strategy' => 'defer', ), true );
         wp_localize_script( 'custom-post-type', 'customPostType_js', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
     }
+    if ( is_front_page() || is_single() ) {
+        wp_enqueue_script( 'lightbox', get_theme_file_uri() . '/assets/js/lightbox.js', array(), '1.0', array( 'strategy' => 'defer', ), true );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
 
-/* fix an PHP error */
+/* fix a PHP error */
 remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
 add_action( 'shutdown', function() {
    while ( @ob_end_flush() );

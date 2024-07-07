@@ -213,10 +213,6 @@ Text Domain:  motaphoto
         }
     }
 
-    @keyframes identifier {
-        
-    }
-
     .photoList {
         margin-top: 100px;
         @include flex( center, flex-start, column ); /* align-items, justify-content, flex-direction */
@@ -412,6 +408,79 @@ Text Domain:  motaphoto
         padding: 60px 0 20px 0;
         @include flex( center, flex-start, column ); /* align-items, justify-content, flex-direction */
     }
+
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80vw;
+        height: 90vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 5vh 10vw;
+        @include flex( center, center, column ); /* align-items, justify-content, flex-direction */
+
+        &.hidden {
+            display: none;
+        }
+        &__container {
+            width: 80%;
+            @include flex( center, center, column ); /* align-items, justify-content, flex-direction */
+        }
+        &__img {
+            height: auto;
+            width: 100%;
+            object-fit: contain;
+        }
+        &__info {
+            color: white;
+            @include flex( flex-end, space-between, row ); /* align-items, justify-content, flex-direction */
+        }
+        &__text {
+            line-height: 4;
+            height: 0;
+        }
+        &__button {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            font-family: 'SpaceMono-Regular';
+            font-size: 12px;
+            background-color: transparent;
+            color: white;
+            position: absolute;
+
+            &--close {
+                top: 50px;
+                right: 75px;
+                font-size: 44px;
+                line-height: 22px;
+                font-family: cursive;
+            }
+            &--previous, &--next {
+                top: 50%;
+            }
+            &--previous {
+                left: 25px;
+            }
+            &--next {
+                right: 50px;
+            }
+        }
+    }
+}
+
+.footer {
+    height: 40px;
+    border-top: 1px solid black;
+
+    &__nav {
+        margin: 8px 0;
+        @include flex( center, center, row ); /* align-items, justify-content, flex-direction */
+
+        &--link {
+            margin: 0 2.5%;
+        }
+    }
 }
 
 .contact {
@@ -497,20 +566,6 @@ Text Domain:  motaphoto
     /* form container div */
     .wpcf7 {
         background-color: white;
-    }
-}
-
-.footer {
-    height: 40px;
-    border-top: 1px solid black;
-
-    &__nav {
-        margin: 8px 0;
-        @include flex( center, center, row ); /* align-items, justify-content, flex-direction */
-
-        &--link {
-            margin: 0 2.5%;
-        }
     }
 }
 
