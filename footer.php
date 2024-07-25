@@ -6,7 +6,6 @@
     }
 
 ?>
-
         </main>
         <footer class="footer">
             <ul class="footer__nav noPadding uppercase">
