@@ -52,6 +52,14 @@
                     /* add the content of the ajax request to the HTML */
                     $( '.photoBlock' ).append( response.data );
 
+                    if ( $( '#lightbox-js' )) {
+                        lightbox = document.createElement( 'script' );
+                        lightbox.src = $( '#lightbox-js' )[0].src;
+                        lightbox.id = $( '#lightbox-js' )[0].id;
+                        $( '#lightbox-js' )[0].remove();
+                        $( 'head' )[0].append( lightbox );
+                    }
+
                     /* if this is the last page of content */
                     if ( response.data.includes( 'last-page' )) {
 
@@ -106,13 +114,19 @@
                     /* add the content of the ajax request to the HTML */
                     $( '.photoBlock' )[0].innerHTML = response.data;
 
+                    if ( $( '#lightbox-js' )) {
+                        lightbox = document.createElement( 'script' );
+                        lightbox.src = $( '#lightbox-js' )[0].src;
+                        lightbox.id = $( '#lightbox-js' )[0].id;
+                        $( '#lightbox-js' )[0].remove();
+                        $( 'head' )[0].append( lightbox );
+                    }
+
                     /* if this is the last page of content */
                     if ( response.data.includes( 'last-page' )) {
-
                         /* hide the "load more" button */
                         $( '.photoList--button' ).hide();
                     } else {
-
                         /* show the "load more" button */
                         $( '.photoList--button' ).show();
                     }
