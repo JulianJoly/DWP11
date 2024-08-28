@@ -1,0 +1,121 @@
+.contact {
+  padding: 5vh 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 90vh;
+  left: 0;
+  top: 0;
+  /* height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* align-items, justify-content */
+  transition-property: opacity, visibility;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  opacity: 1;
+  /* transition-duration */
+}
+.contact.hidden {
+  opacity: 0;
+}
+.contact__form {
+  padding: 0 25%;
+  max-height: calc(90vh - 150px);
+  overflow-y: auto;
+}
+.contact__form p {
+  padding-bottom: 20px;
+  width: 100%;
+  margin: 0;
+  color: #313144;
+  font-weight: 500;
+}
+.contact__form p, .contact__form .wpcf7-submit { /* submit button of the form */
+  font-size: 12px;
+}
+.contact__form .wpcf7-not-valid-tip { /* error messages under every text input */
+  color: #E00000;
+}
+.contact__form .wpcf7-not-valid-tip, .contact__form .wpcf7-text { /* every text inputs of the form and error messages under every text input */
+  margin-top: 5px;
+}
+.contact__form .screen-reader-response, .contact__form .wpcf7-response-output, .contact__form .wpcf7-spinner { /* error messages that are not important to display */
+  display: none;
+}
+.contact__input--message textarea { /* large box for the "message" textarea of the form */
+  max-width: calc(100% - 22px);
+  min-width: calc(100% - 22px);
+  min-height: 40px;
+  height: 160px;
+  padding: 10px;
+}
+.contact__input input, .contact__input textarea { /* every text inputs and the textarea of the form */
+  width: calc(100% - 22px);
+  border: 1px solid #B8BBC2;
+  border-radius: 7px;
+  font-size: 16px;
+}
+.contact__input input { /* every text inputs of the form */
+  height: 40px;
+  padding: 0 10px;
+}
+.contact__submit-button input {
+  font-family: "SpaceMono";
+  font-size: 12px;
+  border: 0;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 2px;
+  min-width: 50px;
+  height: 50px;
+  background-color: #D8D8D8;
+  transition-property: background-color, color, font-weight;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  /* max-width */
+}
+.contact__submit-button input:hover {
+  background-color: black;
+  color: white;
+  font-weight: 700;
+}
+.contact .wpcf7 { /* form container div */
+  width: calc(90% - 10px);
+  max-width: 610px;
+  background-image: url(../assets/img/contact-header.png);
+  background-position-y: 10px;
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-color: white;
+  border: 5px solid black;
+  padding-top: 150px;
+}
+
+.webp-support .contact .wpcf7 { /* form container div */
+  background-image: url(../assets/img/contact-header.png.webp);
+}
+
+/* mobile only */
+@media screen and (max-width: 550px) {
+  .contact {
+    z-index: 99;
+  }
+  .contact .wpcf7 { /* form container div */
+    transition: transform 300ms ease-in-out;
+  }
+  .contact.hidden .wpcf7 { /* form container div */
+    visibility: visible;
+    transform: translate(110%);
+  }
+}
+/* mobile and tablet */
+@media screen and (max-width: 830px) {
+  .contact__form {
+    max-height: calc(90vh - 15vw + 30px);
+    padding: 0 15%;
+  }
+  .contact .wpcf7 { /* form container div */
+    padding-top: calc(15vw + 30px);
+  }
+}/*# sourceMappingURL=contact-form.css.map */

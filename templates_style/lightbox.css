@@ -1,0 +1,144 @@
+.lightbox {
+  padding: 3vh 0;
+  gap: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* align-items, justify-content */
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 94vh;
+  left: 0;
+  top: 0;
+  /* height */
+  transition-property: opacity, visibility;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  opacity: 1;
+  /* transition-duration */
+}
+.lightbox.hidden {
+  opacity: 0;
+}
+.lightbox__container {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* align-items, justify-content */
+}
+.lightbox__img, .lightbox__text {
+  transition-property: opacity, visibility;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  opacity: 1;
+  /* transition-duration */
+}
+.lightbox__img.hidden, .lightbox__text.hidden {
+  opacity: 0;
+}
+.lightbox__img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: auto;
+  height: calc(93vh - 21px); /* lightbox height - text gap - text height */
+  max-width: calc(96vw - 141px - 141px); /* lightbox width - left gap - right gap - left button with - right button width */
+}
+.lightbox__img--large {
+  max-height: calc(93vh - 21px); /* lightbox height - text gap - text height */
+  width: calc(96vw - 141px - 141px); /* lightbox width - left gap - right gap - left button with - right button width */
+  height: auto;
+}
+.lightbox__info {
+  color: white;
+  padding-top: 1vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  /* align-items, justify-content */
+}
+.lightbox__text--category {
+  font-family: "SpaceMono";
+}
+.lightbox__button {
+  background-color: transparent;
+  color: white;
+  font-size: 12px;
+}
+.lightbox__button--close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 22px;
+}
+.lightbox__button--previous, .lightbox__button--next {
+  display: inline-flex;
+  gap: 10px;
+}
+.lightbox__button--previous.hidden, .lightbox__button--next.hidden {
+  display: inherit;
+  visibility: hidden;
+}
+
+/* mobile version */
+@media screen and (max-width: 830px) {
+  .lightbox__img {
+    max-width: 80vw;
+  }
+  .lightbox__img--large {
+    width: 80vw;
+  }
+  .lightbox__button span {
+    display: none;
+  }
+  .lightbox__button--close {
+    top: 2vw;
+    right: 2vw;
+  }
+  .lightbox__button--close svg {
+    width: 6vw;
+    height: 6vw;
+    max-width: 22px;
+    max-height: 22px;
+  }
+  .lightbox__button--previous svg, .lightbox__button--next svg {
+    width: 6vw;
+    height: 3.7777777778vw;
+  }
+  .lightbox__button--previous {
+    padding-left: 2vw;
+  }
+  .lightbox__button--next {
+    padding-right: 2vw;
+  }
+}
+/* desktop version */
+@media screen and (min-width: 831px) {
+  .lightbox__button svg {
+    transition: transform 150ms;
+  }
+  .lightbox__button--previous:hover svg {
+    transform: scale(1.3, 1) translateX(-4px);
+  }
+  .lightbox__button--next:hover svg {
+    transform: scale(1.3, 1) translateX(4px);
+  }
+  .lightbox__button--close:hover svg {
+    transform: scale(1.1, 1.1);
+  }
+  .lightbox__button--previous span, .lightbox__button--next span {
+    transition: text-shadow 150ms;
+  }
+  .lightbox__button--previous:hover span, .lightbox__button--next:hover span {
+    text-shadow: 0 0 2px white;
+  }
+  .lightbox__button--previous {
+    width: 111px;
+    justify-content: flex-end;
+    margin-left: 30px;
+  }
+  .lightbox__button--next {
+    width: 97px;
+    margin-right: 44px;
+  }
+}/*# sourceMappingURL=lightbox.css.map */

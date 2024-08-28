@@ -1,0 +1,76 @@
+@use 'sass:math';
+
+@mixin flex( $align, $justify ) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin background( $height ) {
+    position: fixed;
+    background-color: rgba( 0, 0, 0, 0.8 );
+    height: $height;
+    left: 0;
+    top: 0;
+}
+
+@mixin button( $maxWidth ) {
+    min-width: 50px;
+    max-width: $maxWidth;
+    height: 50px;
+    background-color: #D8D8D8;
+    transition-property: background-color, color, font-weight;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    &:hover {
+        background-color: black;
+        color: white;
+        font-weight: 700;
+    }
+}
+
+@mixin ratio( $width, $height, $backupHeight, $backupHeightTablet, $backupHeightMobile ) {
+    overflow: hidden;
+    @supports ( aspect-ratio: 1 ) {
+        aspect-ratio: math.div( $width, $height );
+    }
+    @supports not ( aspect-ratio: 1 ) {
+        height: $backupHeight;
+        @media screen and ( max-width: 830px ) and ( min-width: 551px ) {
+            height: $backupHeightTablet;
+        }
+        @media screen and ( max-width: 550px ) {
+            height: $backupHeightMobile;
+        }
+    }
+}
+
+@mixin fade( $duration ) {
+    transition-property: opacity, visibility;
+    transition-duration: $duration;
+    transition-timing-function: ease-in-out;
+    opacity: 1;
+    &.hidden {
+        opacity: 0;
+    }
+}
+
+@mixin navAnimation() {
+    svg {
+        transition: transform 150ms;
+    }
+    &--previous {
+        &:hover {
+            svg {
+                transform: scale( 1.3, 1 ) translateX( -4px );
+            }
+        }
+    }
+    &--next {
+        &:hover {
+            svg {
+                transform: scale( 1.3, 1 ) translateX( 4px );
+            }
+        }
+    }
+}

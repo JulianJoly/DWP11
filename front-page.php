@@ -2,9 +2,9 @@
     get_header();
 
     /* create an ajax request */
-    $ajaxRequest = 'data-nonce="' . wp_create_nonce( "motaphoto_request_photos" ) . '" data-action="motaphoto_request_photos" data-ajaxurl="' . admin_url( "admin-ajax.php" ) . '"';
+    $ajaxRequest = 'data-nonce="' . wp_create_nonce( "request_custom_post_type_photo" ) . '" data-action="request_custom_post_type_photo" data-ajaxurl="' . admin_url( "admin-ajax.php" ) . '"';
 
-    /* get a random photo to display inside the hero */
+    /* get a random large photo to display inside the hero */
     $randomPhoto = get_posts( 
         array(
             'orderby'        => 'rand',
@@ -21,7 +21,7 @@
         ) 
     );
 
-    /* get 8 photo card to display in front page */
+    /* get 8 photo cards to display on the front page */
     $args = array(
         'post_status'    => 'publish',
         'post_type'      => 'photo',
@@ -38,37 +38,33 @@
         }
     }
 ?>
-
-            <section class="hero">
-                <?php echo get_the_post_thumbnail( $randomPhoto[0], 'full', [ 'class' => 'hero--img imgCover' ]); ?>
-                <h1 class="hero--title uppercase noMargin">photographe event</h1>
+            <section class="home-hero">
+                <?php echo get_the_post_thumbnail( $randomPhoto[0], 'full', [ 'class' => 'home-hero__img' ]); ?>
+                <h1 class="home-hero__title uppercase margin-0">photographe event</h1>
             </section>
-            <section class="photoList">
-                <div class="photoList__filters width100">
-                    <div class="photoList__filters--container">
-                        <select id="category" class="uppercase" <?php echo $ajaxRequest; ?>>
+            <section class="home-photo-catalog">
+                <div class="home-photo-catalog__filter-container width-100">
+                    <div class="home-photo-catalog__select-container">
+                        <select id="categorySelect" class="uppercase" <?php echo $ajaxRequest; ?>>
                             <option value="" selected>Catégories</option>
                             <?php taxonomy_terms( 'categorie' ); ?>
                         </select>
-                        <select id="format" class="uppercase" <?php echo $ajaxRequest; ?>>
+                        <select id="formatSelect" class="uppercase" <?php echo $ajaxRequest; ?>>
                             <option value="" selected>Formats</option>
                             <?php taxonomy_terms( 'format' ); ?>
                         </select>
                     </div>
-                    <select id="dateOrder" class="uppercase" <?php echo $ajaxRequest; ?>>
+                    <select id="orderSelect" class="uppercase" <?php echo $ajaxRequest; ?>>
                         <option value="" selected>Trier par</option>
                         <option value="DESC">À partir des plus récentes</option>
                         <option value="ASC">À partir des plus anciennes</option>
                     </select>
                 </div>
-                <div class="photoBlock width100">
-                    <?php get_template_part( 'templates_part/photo', 'block', $args ); ?>
+                <div class="photo-card-list width-100">
+                    <?php get_template_part( 'templates_part/photo', 'card', $args ); ?>
                 </div>
-                <button class="photoList--button width100" <?php echo $ajaxRequest; ?>>Charger plus</button>
+                <button class="home-photo-catalog__more-button width-100 pointer" <?php echo $ajaxRequest; ?>>Charger plus</button>
             </section>
-
 <?php
-    get_template_part( 'templates_part/lightbox' );
-
     get_footer();
 ?>

@@ -1,0 +1,112 @@
+@use '../styles/mixins';
+
+.contact {
+    padding: 5vh 0;
+    @include mixins.background( 90vh ); /* height */
+    @include mixins.flex( center, center ); /* align-items, justify-content */
+    @include mixins.fade( 300ms ); /* transition-duration */
+    &__form {
+        padding: 0 25%;
+        max-height: calc( 90vh - 150px );
+        overflow-y: auto;
+        p {
+            padding-bottom: 20px;
+            width: 100%;
+            margin: 0;
+            color: #313144;
+            font-weight: 500;
+        }
+        p, .wpcf7-submit { /* submit button of the form */
+            font-size: 12px;
+        }
+        .wpcf7-not-valid-tip { /* error messages under every text input */
+            color: #E00000;
+        }
+        .wpcf7-not-valid-tip, .wpcf7-text { /* every text inputs of the form and error messages under every text input */
+            margin-top: 5px;
+        }
+        .screen-reader-response, .wpcf7-response-output, .wpcf7-spinner { /* error messages that are not important to display */
+            display: none;
+        }
+    }
+    &__input {
+        &--message {
+            textarea { /* large box for the "message" textarea of the form */
+                max-width: calc( 100% - 22px );
+                min-width: calc( 100% - 22px );
+                min-height: 40px;
+                height: 160px;
+                padding: 10px;
+            }
+        }
+        input, textarea { /* every text inputs and the textarea of the form */
+            width: calc( 100% - 22px );
+            border: 1px solid #B8BBC2;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+        input { /* every text inputs of the form */
+            height: 40px;
+            padding: 0 10px;
+        }
+    }
+    &__submit-button {
+        input {
+            font-family: 'SpaceMono';
+            font-size: 12px;
+            border: 0;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 2px;
+            @include mixins.button( null ); /* max-width */
+        }
+    }
+    .wpcf7 { /* form container div */
+        width: calc( 90% - 10px );
+        max-width: 610px;
+        background-image: url( ../assets/img/contact-header.png );
+        background-position-y: 10px;
+        background-repeat: repeat-x;
+        background-size: contain;
+        background-color: white;
+        border: 5px solid black;
+        padding-top: 150px;
+    }
+}
+
+.webp-support {
+    .contact {
+        .wpcf7 { /* form container div */
+            background-image: url( ../assets/img/contact-header.png.webp );
+        }
+    }
+}
+
+/* mobile only */
+@media screen and ( max-width: 550px ) {
+    .contact {
+        z-index: 99;
+        .wpcf7 { /* form container div */
+            transition: transform 300ms ease-in-out;
+        }
+        &.hidden {
+            .wpcf7 { /* form container div */
+                visibility: visible;
+                transform: translate( 110% );
+            }
+        }
+    }
+}
+
+/* mobile and tablet */
+@media screen and ( max-width: 830px ) {
+    .contact {
+        &__form {
+            max-height: calc( 90vh - 15vw + 30px );
+            padding: 0 15%;
+        }
+        .wpcf7 { /* form container div */
+            padding-top: calc( 15vw + 30px );
+        }
+    }
+}

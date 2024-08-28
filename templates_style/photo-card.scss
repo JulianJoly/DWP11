@@ -1,0 +1,73 @@
+@use '../styles/mixins';
+
+.photo-card {
+    @include mixins.ratio( 1, 1, 42.12vw, 84.24vw, 84.24vw ); /* width, height, backup height, backup height mobile */
+    &__img {
+        object-fit: cover;
+    }
+    &__hover-container {
+        position: sticky;
+        bottom: 0;
+        transition: opacity 300ms ease-in-out;
+        opacity: 0;
+        background: rgba( 0, 0, 0, 0.5 );
+        &:hover {
+            opacity: 1;
+        }
+    }
+    &__link, &__lightbox-button, &__text {
+        position: absolute;
+    }
+    &__link {
+        left: calc( 50% - 23px );
+        top: calc( 50% - 16px );
+    }
+    &__lightbox-button {
+        top: 15px;
+    }
+    &__lightbox-button, &__text--category {
+        right: 15px;
+    }
+    &__text {
+        color: white;
+        bottom: 10px;
+        &--reference {
+            left: 15px;
+        }
+        &--category {
+            font-family: 'SpaceMono';
+        }
+    }
+}
+.last-page {
+    &.hidden {
+        display: none;
+    }
+}
+
+/* tablet and mobile */
+@media screen and ( max-width: 830px ) {
+    .photo-card {
+        padding-bottom: 20px;
+    }
+}
+
+/* wider than tablet */
+@media screen and ( min-width: 831px ) {
+    .photo-card-list {
+        margin-top: 40px;
+        row-gap: 1.736vw;
+        flex-wrap: wrap;
+        @include mixins.flex( baseline, space-between ); /* align-items, justify-content */
+    }
+    .photo-card {
+        width: 49%;
+    }
+}
+
+/* wide screen only */
+@media screen and ( min-width: 1440px ) {
+    .photo-card-list {
+        row-gap: 25px;
+    }
+}
