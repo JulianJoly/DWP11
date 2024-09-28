@@ -40,7 +40,7 @@ add_action( 'after_setup_theme', 'register_motaphoto_menu' );
 
 /* add a custom "contact" button to the navigation menu */
 function add_contact_button( $items, $args ) {
-    $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><button class="header__contact-button pointer uppercase padding-0">Contact</button></li>';
+    $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><button class="header__contact-button uppercase padding-0">Contact</button></li>';
     return $items;
 }
 add_filter( 'wp_nav_menu_items', 'add_contact_button', 10, 2 );

@@ -34,7 +34,7 @@ if ( isset( $args )) {
                     <a class="photo-card__link" href="<?php echo the_permalink(); ?>">
                         <img src="<?php echo $linkToSinglePage; ?>">
                     </a>
-                    <button class="photo-card__lightbox-button pointer padding-0">
+                    <button class="photo-card__lightbox-button padding-0">
                         <img src="<?php echo $lightboxButton; ?>">
                     </button>
                     <p class="photo-card__text photo-card__text--reference margin-0 uppercase"><?php the_field( 'reference' ); ?></p>

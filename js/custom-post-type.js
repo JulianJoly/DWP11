@@ -93,7 +93,7 @@ if ( category && format && order ) {
         })
 
         /* @type { HTML element } */
-        const loadMoreButton = document.getElementsByClassName( 'home-photo-catalog__more-button' )[0];
+        const loadMoreButton = document.getElementsByClassName( 'front-page-photo-catalog__more-button' )[0];
         if ( loadMoreButton ) {
             /* when cliking on the "load more" button */
             loadMoreButton.addEventListener( 'click', function() {

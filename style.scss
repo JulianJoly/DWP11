@@ -11,6 +11,7 @@ Tags:         motaphoto
 Text Domain:  motaphoto
 */
 
+@use 'sass:math';
 @use 'styles/mixins';
 @use 'styles/fonts';
 
@@ -18,31 +19,24 @@ Text Domain:  motaphoto
 .width-100 {
     width: 100%;
 }
-
 .height-100 {
     height: 100%;
 }
-
 .margin-0 {
     margin: 0;
 }
-
 .padding-0 {
     padding: 0;
 }
-
 .uppercase {
     text-transform: uppercase;
 }
-
 .hidden {
     visibility: hidden;
 }
-
 .pointer {
     cursor: pointer;
 }
-
 .hover-bold {
     &, a, button {
         &:hover {
@@ -56,71 +50,71 @@ h1 {
     font-family: 'SpaceMono-BoldItalic';
     font-size: 6.67vw;
 }
-
 h2 {
     font-family: 'SpaceMono-Italic';
     font-size: 66px;
     font-weight: 400;
 }
-
 h3 {
     font-size: 18px;
     font-weight: 400;
 }
-
 p {
     font-family: 'Poppins';
     font-size: 14px;
     font-weight: 300;
 }
-
 a {
     text-decoration: none;
     color: black;
     font-weight: 400;
 }
-
 li {
     list-style: none;
 }
-
 button {
     font-family: 'SpaceMono';
     background-color: transparent;
     border: 0;
     font-size: 12px;
+    cursor: pointer;
 }
-
-.main {
-    padding: 40px 0;
-}
-
 .body {
     max-width: 1440px;
     font-family: 'SpaceMono';
 }
-
+.main {
+    padding: 40px 0;
+}
 .header {
     height: 80px;
     box-shadow: 0 30px 30px -30px #E5E5E5;
     @include mixins.flex( center, space-between ); /* align-items, justify-content */
     &__logo {
-        margin-left: calc( 19vw - 133.6px );
+        width: 15vw;
+        min-width: 138px;
+        max-width: 216px;
+        max-height: 14px;
+        height: auto;
+        margin-left: 10.1389vw;
+        @supports ( aspect-ratio: 1 ) {
+            aspect-ratio: math.div( 216, 14 );
+        }
     }
     &__nav {
-        margin-right: calc( 15vw - 76px );
+        margin-right: 10.1389vw;
     }
     &__menu {
-        gap: 3.47vw;
+        gap: 3.125vw;
         @include mixins.flex( center, flex-start ); /* align-items, justify-content */
     }
     &__contact-button {
         font-size: 16px;
     }
 }
-
 .footer {
-    height: 40px;
+    height: 39px;
+    column-gap: 5.9722vw;
     border-top: 1px solid black;
     @include mixins.flex( center, center ); /* align-items, justify-content */
     &__text {
@@ -131,7 +125,7 @@ button {
 }
 
 /* front-page CSS */
-.home-hero {
+.front-page-hero {
     @include mixins.flex( center, center ); /* align-items, justify-content, flex-direction */
     &__title {
         position: absolute;
@@ -146,18 +140,17 @@ button {
         }
     }
     &__img {
-        width: calc( 100% + 13.88vw );
-        margin: -40px -6.94vw 0  -6.94vw;
+        width: calc( 100% + 20.28vw );
+        margin: -40px -10.14vw 0 -10.14vw;
         height: auto;
         object-fit: cover;
-        @include mixins.ratio( 1440, 962, 962px, 419px, 253px ); /* width, height, backup height, backup height mobile */
+        @include mixins.ratio( 1440, 962, 962px, 419px, 253px ); /* width, height, backup height, backup height tablet, backup height mobile */
     }
     picture {
         width: 100%;
     }
 }
-
-.home-photo-catalog {
+.front-page-photo-catalog {
     margin-top: 80px;
     flex-direction: column;
     @include mixins.flex( center, flex-start ); /* align-items, justify-content */
@@ -179,16 +172,17 @@ button {
         }
     }
 }
-
 .custom-select {
     &__selector, &__option {
         line-height: 42px;
-        width: 200px;
+        width: 15.4167vw;
+        min-width: 202px;
+        max-width: 222px;
         font-family: 'Poppins';
         font-size: 12px;
         font-weight: 500;
         color: #313144;
-        padding: 0 15px;
+        padding: 0 18px;
     }
     &__selector, &__option-list {
         border: 1.3px solid #B8BBC2;
@@ -197,7 +191,7 @@ button {
         border-radius: 8px;
         transition-property: border-radius, border-color;
         transition-duration: 300ms;
-        transition-timing-function: cubic-bezier( 1,0,1,0 );
+        transition-timing-function: cubic-bezier( 1, 0, 1, 0 );
         @include mixins.flex( center, space-between ); /* align-items, justify-content */
         &[aria-expanded="true"] {
             border-color: #215AFF;
@@ -266,43 +260,68 @@ button {
         padding: 20px 0;
     }
 }
-
 .single-interested {
     border-bottom: 1px solid black;
     gap: 2%;
-    display: flex;
+    @include mixins.flex( center, space-between ); /* align-items, justify-content */
     &__contact-container, &__nav-container {
         width: 49%;
     }
     &__contact-container {
-        padding: 34px 0;
+        padding: 35px 0;
         @include mixins.flex( center, space-between ); /* align-items, justify-content */
     }
     &__contact-button {
         width: calc(25vw - 80px);
         @include mixins.button( 250px ); /* max-width */
     }
-    &__nav-container {
-        padding: 8px 0;
-        @include mixins.flex( baseline, flex-end ); /* align-items, justify-content */
-        gap: 10px;
-    }
     &__nav {
-        width: 75px;
+        padding: 8px 0;
+        width: 81px;
         height: 104px;
     }
+    &__nav-thumbnail, &__nav-link {
+        position: absolute;
+    }
     &__nav-thumbnail {
-        width: 75px;
-        height: 75px;
+        width: 81px;
+        height: 71px;
+        opacity: 0;
+        transition: opacity 300ms ease-in-out;
     }
     &__nav-link {
-        height: 18px;
-        display: inline-block;
-        margin-left: 24px;
-        @include mixins.navAnimation();
+        height: 8px;
+        display: inline-flex;
+        margin-top: 90px;
+        &--previous {
+            &:hover {
+                &, & ~ picture {
+                    & .single-interested {
+                        &__nav-thumbnail {
+                            &--previous {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &--next {
+            margin-left: 56px;
+            &:hover {
+                &, & ~ picture {
+                    & .single-interested {
+                        &__nav-thumbnail {
+                            &--next {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
-
 .single-more {
     padding: 60px 0;
 }
@@ -312,16 +331,19 @@ button {
 
     /* global CSS */
     .header {
-        height: 13vw;
+        height: 72px;
         &__logo {
-            margin-left: 5vw;
-            width: 60vw;
+            width: 138px;
+            height: 9px;
+            margin-left: 10.66667vw;
+            @supports ( aspect-ratio: 1 ) {
+                aspect-ratio: math.div( 138, 9 );
+            }
         }
         &__nav-menu-button {
-            margin-right: 5vw;
-            width: 8vw;
-            max-width: 28px;
-            max-height: 19px;
+            margin-right: 10.66667vw;
+            width: 27.42px;
+            height: 18.85px;
         }
         &__menu {
             display: none;
@@ -349,26 +371,31 @@ button {
             nav {
                 ul {
                     position: fixed;
-                    height: calc( 100vh - 13vw );
-                    top: 13vw;
+                    height: calc( 100vh - 72px );
+                    top: 72px;
                     left: 0;
                     background-color: #E00000;
                     flex-direction: column;
                     @include mixins.flex( center, center ); /* align-items, justify-content */
                     a, button {
                         color: white;
-                        font-size: 8vw;
+                        font-size: 44px;
                     }
                 }
             }
         }
     }
-
     .footer {
-        height: 37.6vw;
-        min-height: 142px;
+        height: 208px;
+        row-gap: 24px;
         flex-direction: column;
-        justify-content: space-evenly;
+    }
+
+    /* front-page CSS */
+    .front-page-photo-catalog {
+        &__filter-container {
+            margin-bottom: 30px;
+        }
     }
 
     /* single-photo CSS */
@@ -387,7 +414,6 @@ button {
             width: 100%;
         }
     }
-
 }
 
 /* wider than mobile */
@@ -409,26 +435,10 @@ button {
     .single-interested {
         height: 120px;
     }
-
 }
 
 /* tablet only */
-@media screen and ( min-width: 551px ) and ( max-width: 830px ) {
-
-    /* global CSS */
-    .header {
-        &__logo {
-            margin-left: 2.89vw;
-            width: 40vw;
-        }
-        &__nav-menu-button {
-            margin-right: 2.89vw;
-        }
-    }
-
-    .footer {
-        gap: 5vw;
-    }
+@media screen and ( min-width: 551px ) and ( max-width: 930px ) {
 
     /* single-photo CSS */
     .single-interested {
@@ -436,52 +446,41 @@ button {
             width: 50%;
         }
     }
-
 }
 
 /* tablet and mobile */
-@media screen and ( max-width: 830px ) {
+@media screen and ( max-width: 930px ) {
 
     /* global CSS */
     h2 {
         font-size: 46px;
     }
-
     .main {
         padding: 20px 0;
     }
 
-    .header {
-        &__logo {
-            height: auto;
-        }
-        &__nav {
-            margin-right: 2.89vw;
-        }
-    }
-
     /* front-page CSS */
-    .custom-select {
-        margin-bottom: 5px;
-    }
-
-    .home-hero {
+    .front-page-hero {
         &__img {
             width: 100%;
             margin: -20px 0 0 0;
         }
     }
-
-    .home-photo-catalog {
+    .front-page-photo-catalog {
         padding: 0 10vw;
         margin-bottom: 10px;
         margin-top: 30px;
         &__filter-container {
             width: min-content;
-            margin-bottom: 30px;
         }
         &__select-container {
             width: 100%;
+        }
+    }
+    .custom-select {
+        margin-bottom: 5px;
+        &__selector, &__option {
+            width: 70vw;
         }
     }
 
@@ -494,13 +493,11 @@ button {
             line-height: 45px;
         }
     }
-    
     .single {
         &-photo__info, &-photo__img, &-interested {
             width: 80vw;
         }
     }
-
     .single-interested {
         &__contact-container {
             width: 100%;
@@ -509,33 +506,26 @@ button {
             display: none;
         }
     }
-
     .single-interested, .single-more {
         padding: 0 10vw;
     }
-
     .single-more {
         &__title {
             text-align: center;
         }
     }
-
 }
 
 /* wider than tablet */
-@media screen and ( min-width: 831px ) {
+@media screen and ( min-width: 931px ) {
 
     /* global CSS */
     .main {
-        margin: 0 6.94vw;
-    }
-
-    .footer {
-        gap: 75px;
+        margin: 0 10.14vw;
     }
 
     /* front-page CSS */
-    .home-photo-catalog {
+    .front-page-photo-catalog {
         &__select-container, &__filter-container {
             @include mixins.flex( center, space-between ); /* align-items, justify-content */
         }
@@ -560,7 +550,6 @@ button {
             }
         }
     }
-
 }
 
 /* wide screen only */
@@ -570,33 +559,37 @@ button {
     h1 {
         font-size: 96px;
     }
-
     .body {
         margin: auto;
     }
-
     .main {
-        margin: 0 100px;
+        margin: 0 146px;
     }
-
     .header {
         &__logo {
-            margin-left: 140px;
+            margin-left: 146px;
         }
         &__nav {
-            margin-right: 140px;
+            margin-right: 146px;
+        }
+        &__menu {
+            gap: 45px;
         }
     }
+    .footer {
+        column-gap: 86px;
+    }
 
-    .home-hero {
+    /* front-page CSS */
+    .front-page-hero {
         &__title {
             @supports ( -webkit-text-stroke-width: 2.5px ) {
                 -webkit-text-stroke-width: 2.5px;
             }
         }
         &__img {
-            width: calc( 100% + 200px );
-            margin: -40px -100px 0 -100px;
+            width: calc( 100% + 292px );
+            margin: -40px -146px 0 -146px;
         }
     }
 
@@ -606,5 +599,4 @@ button {
             margin-bottom: 55px;
         }
     }
-
 }

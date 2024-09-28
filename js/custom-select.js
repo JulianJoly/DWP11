@@ -1,5 +1,5 @@
 /* @type { HTML element } */
-const selectContainer = document.getElementsByClassName( 'home-photo-catalog__filter-container' )[0];
+const selectContainer = document.getElementsByClassName( 'front-page-photo-catalog__filter-container' )[0];
 if ( selectContainer ) {
 
     /* @type { HTML collection } */

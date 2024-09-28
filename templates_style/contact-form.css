@@ -110,7 +110,7 @@
   }
 }
 /* mobile and tablet */
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 930px) {
   .contact__form {
     max-height: calc(90vh - 15vw + 30px);
     padding: 0 15%;

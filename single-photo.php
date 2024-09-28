@@ -28,18 +28,14 @@
     );
 
     /* add navigation to the previous and next photo */
-    function photo_nav_arrows( $previous, $next ) {
+    function create_photo_nav( $previous, $next ) {
         if ( get_post( $previous ) != null && get_post_type( $previous ) == 'photo' ) {
-            echo '<div class="single-interested__nav">';
-            echo get_the_post_thumbnail( $previous , 'thumbnail', [ 'class' => 'single-interested__nav-thumbnail' ]);
-            echo '<a class="single-interested__nav-link single-interested__nav-link--previous" href="' . get_post_permalink( $previous ) . '"><svg width="27" height="17" viewBox="0 0 27 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.292893 7.29289C-0.0976311 7.68342 -0.0976311 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292893 7.29289ZM26 9C26.5523 9 27 8.55228 27 8C27 7.44772 26.5523 7 26 7V9ZM1 9H26V7H1V9Z" fill="black"/></svg></a>';
-            echo '</div>';
+            echo '<a class="single-interested__nav-link single-interested__nav-link--previous" href="' . get_post_permalink( $previous ) . '"><svg width="25" height="8" viewBox="0 0 25 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.646447 3.64645C0.451184 3.84171 0.451184 4.15829 0.646447 4.35355L3.82843 7.53553C4.02369 7.7308 4.34027 7.7308 4.53553 7.53553C4.7308 7.34027 4.7308 7.02369 4.53553 6.82843L1.70711 4L4.53553 1.17157C4.7308 0.976311 4.7308 0.659728 4.53553 0.464466C4.34027 0.269204 4.02369 0.269204 3.82843 0.464466L0.646447 3.64645ZM1 4.5H26V3.5H1V4.5Z" fill="black"/></svg></a>';
+            echo get_the_post_thumbnail( $previous , 'thumbnail', [ 'class' => 'single-interested__nav-thumbnail single-interested__nav-thumbnail--previous' ]);
         }
         if ( get_post( $next ) != null && get_post_type( $next ) == 'photo' ) {
-            echo '<div class="single-interested__nav">';
-            echo get_the_post_thumbnail( $next , 'thumbnail', [ 'class' => 'single-interested__nav-thumbnail' ]);
-            echo '<a class="single-interested__nav-link single-interested__nav-link--next" href="' . get_post_permalink( $next ) . '"><svg width="27" height="17" viewBox="0 0 27 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.7071 7.29289C27.0976 7.68342 27.0976 8.31658 26.7071 8.70711L20.3431 15.0711C19.9526 15.4616 19.3195 15.4616 18.9289 15.0711C18.5384 14.6805 18.5384 14.0474 18.9289 13.6569L24.5858 8L18.9289 2.34315C18.5384 1.95262 18.5384 1.31946 18.9289 0.928932C19.3195 0.538408 19.9526 0.538408 20.3431 0.928932L26.7071 7.29289ZM1 9C0.447716 9 0 8.55228 0 8C0 7.44772 0.447716 7 1 7V9ZM26 9H1V7H26V9Z" fill="black"/></svg></a>';
-            echo '</div>';
+            echo '<a class="single-interested__nav-link single-interested__nav-link--next" href="' . get_post_permalink( $next ) . '"><svg width="25" height="8" viewBox="0 0 25 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3536 3.64645C25.5488 3.84171 25.5488 4.15829 25.3536 4.35355L22.1716 7.53553C21.9763 7.7308 21.6597 7.7308 21.4645 7.53553C21.2692 7.34027 21.2692 7.02369 21.4645 6.82843L24.2929 4L21.4645 1.17157C21.2692 0.976311 21.2692 0.659728 21.4645 0.464466C21.6597 0.269204 21.9763 0.269204 22.1716 0.464466L25.3536 3.64645ZM25 4.5H0V3.5H25V4.5Z" fill="black"/></svg></a>';
+            echo get_the_post_thumbnail( $next , 'thumbnail', [ 'class' => 'single-interested__nav-thumbnail single-interested__nav-thumbnail--next' ]);
         }
     }
 ?>
@@ -57,10 +53,10 @@
             <section class="single-interested width-100">
                 <div class="single-interested__contact-container">
                     <p class="single-interested__contact-text">Cette photo vous intéresse ?</p>
-                    <button class="single-interested__contact-button pointer" id="<?php echo $reference; ?>">Contact</button>
+                    <button class="single-interested__contact-button" id="<?php echo $reference; ?>">Contact</button>
                 </div>
-                <div class="single-interested__nav-container">
-                    <?php photo_nav_arrows( $previousPost ,$nextPost ); ?>
+                <div class="single-interested__nav">
+                    <?php create_photo_nav( $previousPost ,$nextPost ); ?>
                 </div>
             </section>
             <section class="single-more">

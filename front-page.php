@@ -38,13 +38,13 @@
         }
     }
 ?>
-            <section class="home-hero">
-                <?php echo get_the_post_thumbnail( $randomPhoto[0], 'full', [ 'class' => 'home-hero__img' ]); ?>
-                <h1 class="home-hero__title uppercase margin-0">photographe event</h1>
+            <section class="front-page-hero">
+                <?php echo get_the_post_thumbnail( $randomPhoto[0], 'full', [ 'class' => 'front-page-hero__img' ]); ?>
+                <h1 class="front-page-hero__title uppercase margin-0">photographe event</h1>
             </section>
-            <section class="home-photo-catalog">
-                <div class="home-photo-catalog__filter-container width-100">
-                    <div class="home-photo-catalog__select-container">
+            <section class="front-page-photo-catalog">
+                <div class="front-page-photo-catalog__filter-container width-100">
+                    <div class="front-page-photo-catalog__select-container">
                         <select id="categorySelect" class="uppercase" <?php echo $ajaxRequest; ?>>
                             <option value="" selected>Catégories</option>
                             <?php taxonomy_terms( 'categorie' ); ?>
@@ -63,7 +63,7 @@
                 <div class="photo-card-list width-100">
                     <?php get_template_part( 'templates_part/photo', 'card', $args ); ?>
                 </div>
-                <button class="home-photo-catalog__more-button width-100 pointer" <?php echo $ajaxRequest; ?>>Charger plus</button>
+                <button class="front-page-photo-catalog__more-button width-100" <?php echo $ajaxRequest; ?>>Charger plus</button>
             </section>
 <?php
     get_footer();

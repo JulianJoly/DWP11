@@ -1,7 +1,7 @@
 @use '../styles/mixins';
 
 .photo-card {
-    @include mixins.ratio( 1, 1, 42.12vw, 84.24vw, 84.24vw ); /* width, height, backup height, backup height mobile */
+    @include mixins.ratio( 564, 495, 37.04vw, 74.07vw, 74.07vw ); /* width, height, backup height, backup height tablet, backup height mobile */
     &__img {
         object-fit: cover;
     }
@@ -39,35 +39,36 @@
         }
     }
 }
+
 .last-page {
     &.hidden {
         display: none;
     }
 }
 
-/* tablet and mobile */
-@media screen and ( max-width: 830px ) {
+/* mobile only */
+@media screen and ( max-width: 550px ) {
     .photo-card {
         padding-bottom: 20px;
     }
 }
 
-/* wider than tablet */
-@media screen and ( min-width: 831px ) {
+/* wider than mobile */
+@media screen and ( min-width: 551px ) {
     .photo-card-list {
         margin-top: 40px;
-        row-gap: 1.736vw;
+        row-gap: 1.39vw;
         flex-wrap: wrap;
         @include mixins.flex( baseline, space-between ); /* align-items, justify-content */
     }
     .photo-card {
-        width: 49%;
+        width: 49.13%;
     }
 }
 
 /* wide screen only */
 @media screen and ( min-width: 1440px ) {
     .photo-card-list {
-        row-gap: 25px;
+        row-gap: 20px;
     }
 }

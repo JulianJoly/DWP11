@@ -55,8 +55,8 @@
     }
 }
 
-/* mobile version */
-@media screen and ( max-width: 830px ) {
+/* mobile and tablet */
+@media screen and ( max-width: 930px ) {
     .lightbox {
         &__img {
             max-width: 80vw;
@@ -94,11 +94,13 @@
     }
 }
 
-/* desktop version */
+/* wider than tablet */
 @media screen and ( min-width: 831px ) {
     .lightbox {
         &__button {
-            @include mixins.navAnimation();
+            svg {
+                transition: transform 150ms;
+            }
             &--close {
                 &:hover {
                     svg {
@@ -120,10 +122,20 @@
                 width: 111px;
                 justify-content: flex-end;
                 margin-left: 30px;
+                &:hover {
+                    svg {
+                        transform: scale( 1.3, 1 ) translateX( -4px );
+                    }
+                }
             }
             &--next {
                 width: 97px;
                 margin-right: 44px;
+                &:hover {
+                    svg {
+                        transform: scale( 1.3, 1 ) translateX( 4px );
+                    }
+                }
             }
         }
     }
