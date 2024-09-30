@@ -404,13 +404,13 @@ button {
   display: inline-flex;
   margin-top: 90px;
 }
-.single-interested__nav-link--previous:hover .single-interested__nav-thumbnail--previous, .single-interested__nav-link--previous:hover ~ picture .single-interested__nav-thumbnail--previous {
+.single-interested__nav-link--previous:hover .single-interested__nav-thumbnail--previous, .single-interested__nav-link--previous:hover ~ .single-interested__nav-thumbnail--previous, .single-interested__nav-link--previous:hover ~ picture .single-interested__nav-thumbnail--previous, .single-interested__nav-link--previous:hover ~ picture ~ .single-interested__nav-thumbnail--previous {
   opacity: 1;
 }
 .single-interested__nav-link--next {
   margin-left: 56px;
 }
-.single-interested__nav-link--next:hover .single-interested__nav-thumbnail--next, .single-interested__nav-link--next:hover ~ picture .single-interested__nav-thumbnail--next {
+.single-interested__nav-link--next:hover .single-interested__nav-thumbnail--next, .single-interested__nav-link--next:hover ~ .single-interested__nav-thumbnail--next, .single-interested__nav-link--next:hover ~ picture .single-interested__nav-thumbnail--next, .single-interested__nav-link--next:hover ~ picture ~ .single-interested__nav-thumbnail--next {
   opacity: 1;
 }
 
@@ -577,7 +577,7 @@ button {
   .single-interested__contact-container {
     width: 100%;
   }
-  .single-interested__nav-container {
+  .single-interested__nav {
     display: none;
   }
   .single-interested, .single-more {

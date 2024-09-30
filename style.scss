@@ -296,7 +296,7 @@ button {
         &--previous {
             &:hover {
                 &, & ~ picture {
-                    & .single-interested {
+                    & .single-interested, & ~ .single-interested {
                         &__nav-thumbnail {
                             &--previous {
                                 opacity: 1;
@@ -310,7 +310,7 @@ button {
             margin-left: 56px;
             &:hover {
                 &, & ~ picture {
-                    & .single-interested {
+                    & .single-interested, & ~ .single-interested {
                         &__nav-thumbnail {
                             &--next {
                                 opacity: 1;
@@ -502,7 +502,7 @@ button {
         &__contact-container {
             width: 100%;
         }
-        &__nav-container {
+        &__nav {
             display: none;
         }
     }
